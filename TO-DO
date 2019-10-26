@@ -1,0 +1,16 @@
+### TO-DO
+- README.md
+
+- Terraform:
+  - Compute: Support placement groups
+  - Documentation, ebs_optimized = "true" | Error launching source instance: Unsupported: EBS-optimized instances are not supported for your requested configuration. Please check the documentation for supported configurations.
+  - Documentation, Provider: Credentials are in ~/.aws
+  - Provider: add "profile"?
+  - VPC: Public and private subnets
+  - Compute/EBS: additional options (like volume_type and iops) to root_block_device
+  - Compute: set subnet_id besides availability_zone in instances
+  - Documentation, AWS Region: Ireland, eu-west-1
+  - Add support to another AWS regions
+  - S3: Remote state file
+  - Documentation: terraform.tfvars
+  - Appropriate security group rules
