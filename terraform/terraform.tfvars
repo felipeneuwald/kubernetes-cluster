@@ -1,3 +1,8 @@
+### Backend
+backend_s3_bucket                    = "felipeneuwald-kubernetes-cluster"
+backend_s3_key                       = "kubernetes-cluster/terraform"
+backend_s3_region                    = "eu-west-1"
+
 ### Provider
 provider_region                      = "eu-west-1"
 

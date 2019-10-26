@@ -1,4 +1,9 @@
+variable "backend_s3_bucket" {}
+variable "backend_s3_key" {}
+variable "backend_s3_region" {}
+
 variable "provider_region" {}
+
 variable "vpc_cidr_block" {}
 variable "subnet-a_cidr_block" {}
 variable "subnet-a_availability_zone" {}
