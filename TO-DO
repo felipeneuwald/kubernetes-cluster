@@ -16,3 +16,11 @@
   [ ] Documentation regarding S3 remote state & state locking with DynamoDB
   [ ] Documentation: terraform.tfvars
   [ ] Appropriate security group rules
+
+- Ansible:
+  [ ] Document dynamic inventory
+   - https://docs.ansible.com/ansible/latest/user_guide/intro_dynamic_inventory.html
+   - https://raw.githubusercontent.com/ansible/ansible/devel/contrib/inventory/ec2.py
+   - https://raw.githubusercontent.com/ansible/ansible/devel/contrib/inventory/ec2.ini
+
+  [ ] A way to have both Terraform and Ansible variables all in one configuration file
