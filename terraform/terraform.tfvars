@@ -21,15 +21,25 @@ subnet-c_availability_zone           = "eu-west-1c"
 
 ### Master nodes
 master_instance_ami                  = "ami-02df9ea15c1778c9c"
-master_instance_type                 = "t2.micro"
+#master_instance_type                 = "t3a.small"
+master_instance_type                 = "t2.small"
 master_monitoring                    = "false"
 master_ebs_optimized                 = "false"
 master_root_block_device_volume_size = "10"
 
+### etcd nodes
+etcd_instance_ami                    = "ami-02df9ea15c1778c9c"
+#etcd_instance_type                   = "t3a.small"
+etcd_instance_type                   = "t2.small"
+etcd_monitoring                      = "false"
+etcd_ebs_optimized                   = "false"
+etcd_root_block_device_volume_size   = "10"
+
 ### Worker nodes
 worker_nodes_per_az                  = "1"
 worker_instance_ami                  = "ami-02df9ea15c1778c9c"
-worker_instance_type                 = "t2.micro"
+# worker_instance_type                 = "t3a.small"
+worker_instance_type                 = "t2.small"
 worker_monitoring                    = "false"
 worker_ebs_optimized                 = "false"
 worker_root_block_device_volume_size = "10"
