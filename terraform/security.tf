@@ -3,6 +3,24 @@ resource "aws_security_group" "kubernetes-cluster" {
   description = "kubernetes-cluster"
 
   ingress {
+    protocol    = -1
+    self        = true
+    from_port   = 0
+    to_port     = 0
+    description = "Self traffic"
+  }
+
+  egress {
+    from_port     = 0
+    to_port       = 0
+    protocol      = "-1"
+    cidr_blocks   = [
+      "0.0.0.0/0"
+    ]
+    description   = "Outbound traffic"
+  }
+
+  ingress {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
@@ -11,14 +29,9 @@ resource "aws_security_group" "kubernetes-cluster" {
     ]
     description = "SSH"
   }
-
-  egress {
-    from_port       = 0
-    to_port         = 0
-    protocol        = "-1"
-    cidr_blocks = [
-      "0.0.0.0/0"
-    ]
-    description = "Outbound traffic"
+  
+  tags = {
+    Name        = "kubernetes-cluster"
+    Project     = "kubernetes-cluster"
   }
 }

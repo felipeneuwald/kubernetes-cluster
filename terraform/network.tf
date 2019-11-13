@@ -4,6 +4,7 @@ resource "aws_vpc" "kubernetes-cluster" {
   enable_dns_hostnames = "true"
   tags                 = {
     Name               = "kubernetes-cluster"
+    Project            = "kubernetes-cluster"
   }
 }
 
@@ -13,6 +14,7 @@ resource "aws_subnet" "subnet-a" {
   availability_zone = "${var.subnet-a_availability_zone}"
   tags              = {
     Name            = "subnet-a"
+    Project         = "kubernetes-cluster"
   }
 }
 
@@ -22,6 +24,7 @@ resource "aws_subnet" "subnet-b" {
   availability_zone = "${var.subnet-b_availability_zone}"
   tags              = {
     Name            = "subnet-b"
+    Project         = "kubernetes-cluster"
   }
 }
 
@@ -31,5 +34,6 @@ resource "aws_subnet" "subnet-c" {
   availability_zone = "${var.subnet-c_availability_zone}"
   tags              = {
     Name            = "subnet-c"
+    Project         = "kubernetes-cluster"
   }
 }

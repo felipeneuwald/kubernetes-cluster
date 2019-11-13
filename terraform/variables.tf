@@ -1,4 +1,9 @@
+variable "backend_s3_bucket" {}
+variable "backend_s3_key" {}
+variable "backend_s3_region" {}
+
 variable "provider_region" {}
+
 variable "vpc_cidr_block" {}
 variable "subnet-a_cidr_block" {}
 variable "subnet-a_availability_zone" {}
@@ -15,6 +20,12 @@ variable "master_instance_type" {}
 variable "master_ebs_optimized" {}
 variable "master_monitoring" {}
 variable "master_root_block_device_volume_size" {}
+
+variable "etcd_instance_ami" {}
+variable "etcd_instance_type" {}
+variable "etcd_ebs_optimized" {}
+variable "etcd_monitoring" {}
+variable "etcd_root_block_device_volume_size" {}
 
 variable "worker_nodes_per_az" {}
 variable "worker_instance_ami" {}
