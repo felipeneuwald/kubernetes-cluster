@@ -11,6 +11,7 @@ resource "aws_instance" "master-a" {
   tags   = {
     Name            = "master-a"
     Type            = "master"
+    Project         = "kubernetes-cluster"
   }
   root_block_device {
     volume_size     = "${var.master_root_block_device_volume_size}"
@@ -30,6 +31,7 @@ resource "aws_instance" "master-b" {
   tags   = {
     Name            = "master-b"
     Type            = "master"
+    Project         = "kubernetes-cluster"
   }
   root_block_device {
     volume_size     = "${var.master_root_block_device_volume_size}"
@@ -49,6 +51,7 @@ resource "aws_instance" "master-c" {
   tags   = {
     Name            = "master-c"
     Type            = "master"
+    Project         = "kubernetes-cluster"
   }
   root_block_device {
     volume_size     = "${var.master_root_block_device_volume_size}"
@@ -68,6 +71,7 @@ resource "aws_instance" "etcd-a" {
   tags   = {
     Name            = "etcd-a"
     Type            = "etcd"
+    Project         = "kubernetes-cluster"
   }
   root_block_device {
     volume_size     = "${var.master_root_block_device_volume_size}"
@@ -87,6 +91,7 @@ resource "aws_instance" "etcd-b" {
   tags   = {
     Name            = "etcd-b"
     Type            = "etcd"
+    Project         = "kubernetes-cluster"
   }
   root_block_device {
     volume_size     = "${var.master_root_block_device_volume_size}"
@@ -106,6 +111,7 @@ resource "aws_instance" "etcd-c" {
   tags   = {
     Name            = "etcd-c"
     Type            = "etcd"
+    Project         = "kubernetes-cluster"
   }
   root_block_device {
     volume_size     = "${var.master_root_block_device_volume_size}"
@@ -126,6 +132,7 @@ resource "aws_instance" "worker-a" {
   tags   = {
     Name            = "worker-a-${count.index}"
     Type            = "worker"
+    Project         = "kubernetes-cluster"
   }
   root_block_device {
     volume_size     = "${var.worker_root_block_device_volume_size}"
@@ -146,6 +153,7 @@ resource "aws_instance" "worker-b" {
   tags   = {
     Name            = "worker-b-${count.index}"
     Type            = "worker"
+    Project         = "kubernetes-cluster"
   }
   root_block_device {
     volume_size     = "${var.worker_root_block_device_volume_size}"
@@ -166,6 +174,7 @@ resource "aws_instance" "worker-c" {
   tags   = {
     Name            = "worker-c-${count.index}"
     Type            = "worker"
+    Project         = "kubernetes-cluster"
   }
   root_block_device {
     volume_size     = "${var.worker_root_block_device_volume_size}"
