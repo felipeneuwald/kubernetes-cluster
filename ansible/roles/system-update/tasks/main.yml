@@ -1,0 +1,20 @@
+---
+- name: Install aptitude
+  apt:
+    name: aptitude
+    state: present
+
+- name: Update system
+  apt:
+    update_cache: yes
+    upgrade: 'yes'
+
+- name: Check if restart is required
+  stat:
+    path: /var/run/reboot-required
+  register: check_reboot_result
+
+- name: Restart system
+  reboot:
+  when: check_reboot_result.stat.exists == true
+...
