@@ -29,4 +29,9 @@ resource "aws_security_group" "kubernetes-cluster" {
     ]
     description = "SSH"
   }
+  
+  tags = {
+    Name        = "kubernetes-cluster"
+    Project     = "kubernetes-cluster"
+  }
 }
