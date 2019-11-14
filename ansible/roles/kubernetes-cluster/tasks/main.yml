@@ -1,0 +1,7 @@
+---
+- name: Include base tasks
+  include_tasks: base.yml
+
+- name: Include docker
+  include_tasks: docker.yml
+...
