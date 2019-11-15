@@ -9,6 +9,14 @@
   notify:
     - restart docker
 
+- name: Prevent Docker packages of being upgraded
+  dpkg_selections:
+    name: "{{ item }}"
+    selection: hold
+  with_list:
+    - docker-ce
+    - docker-ce-cli
+
 - name: Template /etc/docker/daemon.json
   template:
     src: docker-daemon.json.j2
