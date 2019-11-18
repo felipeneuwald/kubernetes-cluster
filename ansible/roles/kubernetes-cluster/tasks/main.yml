@@ -1,0 +1,30 @@
+---
+- name: Include base tasks
+  include_tasks: base.yml
+
+- name: Include docker
+  include_tasks: docker.yml
+
+### to be addded to a specific file
+- name: Install Kubernetes packages
+  apt:
+    name:
+      - kubelet
+      - kubeadm
+      - kubectl
+    state: present
+
+- name: Prevent Kubernetes packages of being upgraded
+  dpkg_selections:
+    name: "{{ item }}"
+    selection: hold
+  with_list:
+    - kubelet
+    - kubeadm
+    - kubectl
+
+- name: Include etcd
+  include_tasks: etcd.yml
+  when: inventory_hostname in groups['tag_Type_etcd']
+
+...
