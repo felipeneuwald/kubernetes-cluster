@@ -22,4 +22,9 @@
     - kubelet
     - kubeadm
     - kubectl
+
+- name: Include etcd
+  include_tasks: etcd.yml
+  when: inventory_hostname in groups['tag_Type_etcd']
+
 ...
