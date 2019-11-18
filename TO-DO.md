@@ -1,6 +1,7 @@
 # TO-DO
 - [ ] README.md
 - [ ] A way to have both Terraform and Ansible variables all in one configuration file
+- [ ] Add a version.txt in the first version
 - Terraform
  - [ ] Compute: Support placement groups
  - [ ] Documentation, ebs_optimized = "true" | Error launching source instance: Unsupported: EBS-optimized instances are not supported for your requested configuration. Please check the documentation for supported configurations.
@@ -19,3 +20,5 @@
 - Ansible
  -  [ ] Document dynamic inventory - [link1](https://docs.ansible.com/ansible/latest/user_guide/intro_dynamic_inventory.html), [link2](https://raw.githubusercontent.com/ansible/ansible/devel/contrib/inventory/ec2.py), [link3](https://raw.githubusercontent.com/ansible/ansible/devel/contrib/inventory/ec2.ini)
  - [ ] Enforce Kubernetes packages version
+ - [ ] Packages marked as on hold are still being upgraded
+ - [ ] Improve template, add a loop in etcd-kubeadmcfg.yaml.j2
