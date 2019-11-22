@@ -10,11 +10,61 @@
 - name: Template /tmp/etcd-kubeadmcfg.yaml
   template:
     src: etcd-kubeadmcfg.yaml.j2
-    dest: /tmp/kubeadmcfg.yaml
+    dest: /etc/kubernetes/kubeadmcfg.yaml
 
 - name: kubeadm init phase certs etcd-ca
   shell:
     cmd: kubeadm init phase certs etcd-ca
     creates: /etc/kubernetes/pki/etcd/ca.key
   when: ec2_tag_Name == "etcd-a"
+
+- name: fetch certs ca.crt
+  fetch:
+    src: /etc/kubernetes/pki/etcd/{{ item }}
+    dest: /tmp/kubernetes-cluster-etcd/
+    flat: yes
+  with_items:
+    - ca.crt
+    - ca.key
+  when: ec2_tag_Name == "etcd-a"
+
+- name: copy ca cert
+  copy:
+    src: /tmp/kubernetes-cluster-etcd/
+    dest: /etc/kubernetes/pki/etcd/
+  when: ec2_tag_Name != "etcd-a"
+
+- name: remove local directory /tmp/kubernetes-cluster-etcd/
+  local_action:
+    module: file
+    path: /tmp/kubernetes-cluster-etcd/
+    state: absent
+  become: no
+  run_once: true
+
+- name: file permissions, /etc/kubernetes/pki/etcd/ca.key
+  file:
+    path: /etc/kubernetes/pki/etcd/ca.key
+    mode: '0600'
+  when: ec2_tag_Name != "etcd-a"
+
+- name: kubeadm init phase certs ....
+  shell:
+    cmd: "{{ item }}"
+  with_items:
+    - "kubeadm init phase certs etcd-server --config=/etc/kubernetes/kubeadmcfg.yaml"
+    - "kubeadm init phase certs etcd-peer --config=/etc/kubernetes/kubeadmcfg.yaml"
+    - "kubeadm init phase certs etcd-healthcheck-client --config=/etc/kubernetes/kubeadmcfg.yaml"
+    - "kubeadm init phase certs apiserver-etcd-client --config=/etc/kubernetes/kubeadmcfg.yaml"
+
+- name: remove /etc/kubernetes/pki/etcd/ca.key
+  file:
+    path: /etc/kubernetes/pki/etcd/ca.key
+    state: absent
+  when: ec2_tag_Name != "etcd-a"
+
+- name: kubeadm init phase etcd local
+  shell:
+    cmd: kubeadm init phase etcd local --config=/etc/kubernetes/kubeadmcfg.yaml
+    # creates: /etc/kubernetes/manifests/etcd.yaml
 ...
