@@ -22,3 +22,4 @@
  - [ ] Enforce Kubernetes packages version
  - [ ] Packages marked as on hold are still being upgraded
  - [ ] Improve template, add a loop in etcd-kubeadmcfg.yaml.j2
+ - [ ] Set "hostname_variable = tag_Name" in ec2.ini? 
