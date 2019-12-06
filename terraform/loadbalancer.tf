@@ -2,9 +2,9 @@ resource "aws_elb" "kube-apiserver" {
   name                        = "kube-apiserver"
   internal                    = true
   cross_zone_load_balancing   = true
-  idle_timeout                = 60
-  connection_draining         = true
-  connection_draining_timeout = 300
+  idle_timeout                = var.lb_kube-apiserver_idle_timeout
+  connection_draining         = var.lb_kube-apiserver_connection_draining
+  connection_draining_timeout = var.lb_kube-apiserver_connection_draining_timeout
   subnets                     = [
     "${aws_subnet.subnet-a.id}",
     "${aws_subnet.subnet-b.id}",
@@ -19,17 +19,17 @@ resource "aws_elb" "kube-apiserver" {
     "${aws_instance.master-c.id}"
   ]
   listener {
-    instance_port             = 6443
+    instance_port             = var.lb_kube-apiserver_instance_port
     instance_protocol         = "TCP"
-    lb_port                   = 6443
+    lb_port                   = var.lb_kube-apiserver_lb_port
     lb_protocol               = "TCP"
   }
   health_check {
-    healthy_threshold         = 6
-    unhealthy_threshold       = 3
-    timeout                   = 2
-    target                    = "TCP:6443"
-    interval                  = 10
+    healthy_threshold         = var.lb_kube-apiserver_health_check_healthy_threshold
+    unhealthy_threshold       = var.lb_kube-apiserver_health_check_unhealthy_threshold
+    timeout                   = var.lb_kube-apiserver_health_check_timeout
+    target                    = "TCP:${var.lb_kube-apiserver_instance_port}"
+    interval                  = var.lb_kube-apiserver_health_check_interval
   }
   tags                        = {
     Name                      = "kube-apiserver"
