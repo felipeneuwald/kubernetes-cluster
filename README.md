@@ -8,10 +8,10 @@ This is a work in progress.
 
 ### AWS
 - A valid AWS account
--
+- ...
 
 ### Terraform
-
+- Terraform v0.12.17
 
 ### Ansible
-- Ansible 2.8.5
+- Ansible 2.9.1

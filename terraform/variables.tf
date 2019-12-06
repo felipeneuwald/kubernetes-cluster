@@ -33,3 +33,13 @@ variable "worker_instance_type" {}
 variable "worker_ebs_optimized" {}
 variable "worker_monitoring" {}
 variable "worker_root_block_device_volume_size" {}
+
+variable "lb_kube-apiserver_idle_timeout" {}
+variable "lb_kube-apiserver_connection_draining" {}
+variable "lb_kube-apiserver_connection_draining_timeout" {}
+variable "lb_kube-apiserver_instance_port" {}
+variable "lb_kube-apiserver_lb_port" {}
+variable "lb_kube-apiserver_health_check_healthy_threshold" {}
+variable "lb_kube-apiserver_health_check_unhealthy_threshold" {}
+variable "lb_kube-apiserver_health_check_timeout" {}
+variable "lb_kube-apiserver_health_check_interval" {}
