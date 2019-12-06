@@ -1,7 +1,7 @@
 resource "aws_security_group" "kubernetes-cluster" {
   name        = "kubernetes-cluster"
   description = "kubernetes-cluster"
-  vpc_id      = "${aws_vpc.kubernetes-cluster.id}"
+  vpc_id      = aws_vpc.kubernetes-cluster.id
 
   ingress {
     protocol    = -1
