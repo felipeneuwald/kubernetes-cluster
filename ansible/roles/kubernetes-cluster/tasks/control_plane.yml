@@ -1,2 +1,147 @@
 ---
+- name: Gathering facts, kube-apiserver ELB
+  ec2_elb_info:
+    region: eu-west-1
+    names:
+      - kube-apiserver
+  register: elb_kube_apiserver
+  become: no
+  delegate_to: localhost
+  when: inventory_hostname in groups['tag_Type_master']
+
+- name: Debug
+  debug:
+    msg: "{{ elb_kube_apiserver.elbs.0.dns_name }}"
+  when: inventory_hostname in groups['tag_Type_master']
+
+- name: Debug
+  debug:
+    msg: "{{ elb_kube_apiserver.elbs.0.listeners.0.load_balancer_port }}"
+  when: inventory_hostname in groups['tag_Type_master']
+
+- name: fetch certs ca.crt
+  fetch:
+    src: /etc/kubernetes/pki/etcd/{{ item }}
+    dest: /tmp/kubernetes-cluster-control_plane/etcd/
+    flat: yes
+  with_items:
+    - ca.crt
+  when: ec2_tag_Name == "etcd-a"
+
+- name: fetch certs apiserver-etcd
+  fetch:
+    src: /etc/kubernetes/pki/{{ item }}
+    dest: /tmp/kubernetes-cluster-control_plane/
+    flat: yes
+  with_items:
+    - apiserver-etcd-client.crt
+    - apiserver-etcd-client.key
+  when: ec2_tag_Name == "etcd-a"
+
+- name: copy ca cert
+  copy:
+    src: /tmp/kubernetes-cluster-control_plane/
+    dest: /etc/kubernetes/pki/
+  when: ec2_tag_Name == "master-a"
+
+- name: remove local directory /tmp/kubernetes-cluster-control_plane/
+  local_action:
+    module: file
+    path: /tmp/kubernetes-cluster-control_plane/
+    state: absent
+  become: no
+  run_once: true
+
+- name: file permissions, /etc/kubernetes/pki/apiserver-etcd-client.key
+  file:
+    path: /etc/kubernetes/pki/apiserver-etcd-client.key
+    mode: '0600'
+  when: ec2_tag_Name == "master-a"
+
+- name: Template kubeadm-config.yaml
+  template:
+    src: control_plane-kubeadm-config.yaml.j2
+    dest: /etc/kubernetes/kubeadm-config.yaml
+  when: ec2_tag_Name == "master-a"
+
+- name: kubeadm init --config kubeadm-config.yaml
+  shell:
+    cmd: kubeadm init --config /etc/kubernetes/kubeadm-config.yaml > /var/log/kubeadm-config.log
+    creates: /etc/kubernetes/manifests/kube-apiserver.yaml
+  when: ec2_tag_Name == "master-a"
+
+- name: fetch certs from master-a
+  fetch:
+    src: /etc/kubernetes/pki/etcd/{{ item }}
+    dest: /tmp/kubernetes-cluster-cplane_master/etcd/
+    flat: yes
+  with_items:
+    - ca.crt
+  when: ec2_tag_Name == "master-a"
+
+- name: fetch certs apiserver-etcd
+  fetch:
+    src: /etc/kubernetes/pki/{{ item }}
+    dest: /tmp/kubernetes-cluster-cplane_master/
+    flat: yes
+  with_items:
+    - ca.crt
+    - ca.key
+    - sa.key
+    - sa.pub
+    - front-proxy-ca.crt
+    - front-proxy-ca.key
+    - apiserver-etcd-client.crt
+    - apiserver-etcd-client.key
+  when: ec2_tag_Name == "master-a"
+
+- name: copy ca cert
+  copy:
+    src: /tmp/kubernetes-cluster-cplane_master/
+    dest: /etc/kubernetes/pki/
+  when: ec2_tag_Type == "master" and ec2_tag_Name != "master-a"
+
+- name: remove local directory /tmp/kubernetes-cluster-cplane_master/
+  local_action:
+    module: file
+    path: /tmp/kubernetes-cluster-cplane_master/
+    state: absent
+  become: no
+  run_once: true
+
+- name: file permissions
+  file:
+    path: /etc/kubernetes/pki/{{ item }}
+    mode: '0600'
+  with_items:
+    - ca.key
+    - front-proxy-ca.key
+    - sa.key
+    - sa.pub
+    - apiserver-etcd-client.key
+  when: ec2_tag_Type == "master" and ec2_tag_Name != "master-a"
+
+- name: kubeadm token create --print-join-command --ttl 30m
+  shell:
+    cmd: kubeadm token create --print-join-command --ttl 30m
+  register: token_create
+  when: ec2_tag_Name == "master-a"
+
+- name: Debug
+  debug:
+    msg: "{{ token_create.stdout }}"
+  when: ec2_tag_Name == "master-a"
+
+- name: Debug
+  debug:
+    msg: "{{ hostvars['master_a']['token_create']['stdout'] }}"
+  when: ec2_tag_Type == "master" and ec2_tag_Name != "master-a"
+
+- name: kubeadm join
+  shell:
+    cmd: "{{ hostvars['master_a']['token_create']['stdout'] }} --control-plane"
+    creates: /etc/kubernetes/manifests/kube-apiserver.yaml
+  when: ec2_tag_Type == "master" and ec2_tag_Name != "master-a"
+
+
 ...
