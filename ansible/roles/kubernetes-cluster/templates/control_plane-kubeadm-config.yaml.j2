@@ -1,0 +1,13 @@
+apiVersion: kubeadm.k8s.io/v1beta2
+kind: ClusterConfiguration
+kubernetesVersion: stable
+controlPlaneEndpoint: "{{ elb_kube_apiserver.elbs.0.dns_name }}:{{ elb_kube_apiserver.elbs.0.listeners.0.load_balancer_port }}"
+etcd:
+    external:
+        endpoints:
+        - https://{{ hostvars[groups.tag_Type_etcd[0]].ansible_default_ipv4.address }}:2379
+        - https://{{ hostvars[groups.tag_Type_etcd[1]].ansible_default_ipv4.address }}:2379
+        - https://{{ hostvars[groups.tag_Type_etcd[2]].ansible_default_ipv4.address }}:2379
+        caFile: /etc/kubernetes/pki/etcd/ca.crt
+        certFile: /etc/kubernetes/pki/apiserver-etcd-client.crt
+        keyFile: /etc/kubernetes/pki/apiserver-etcd-client.key
