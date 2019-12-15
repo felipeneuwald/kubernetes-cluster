@@ -33,4 +33,7 @@
 - name: Include control_plane
   include_tasks: control_plane.yml
   # when: inventory_hostname in groups['tag_Type_master']
+
+- name: Include worker
+  include_tasks: worker.yml
 ...

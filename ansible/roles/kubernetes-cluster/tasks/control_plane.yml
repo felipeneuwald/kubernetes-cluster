@@ -143,5 +143,27 @@
     creates: /etc/kubernetes/manifests/kube-apiserver.yaml
   when: ec2_tag_Type == "master" and ec2_tag_Name != "master-a"
 
+- name: creates /root/.kube
+  file:
+    path: /root/.kube
+    state: directory
+  when: ec2_tag_Type == "master"
 
+- name: copies /etc/kubernetes/admin.conf to /root/.kube/config
+  shell:
+    cmd: cp /etc/kubernetes/admin.conf /root/.kube/config
+    creates: /root/.kube/config
+  when: ec2_tag_Type == "master"
+
+- name: set /root/.kube/config permissions
+  file:
+    path: /root/.kube/config
+    owner: root
+    group: root
+  when: ec2_tag_Type == "master"
+
+- name: apply CNI plugin
+  shell:
+    cmd: kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+  when: ec2_tag_Name == "master-a"
 ...
