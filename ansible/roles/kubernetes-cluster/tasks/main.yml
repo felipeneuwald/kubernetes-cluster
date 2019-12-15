@@ -27,7 +27,13 @@
   include_tasks: etcd.yml
   when: inventory_hostname in groups['tag_Type_etcd']
 
+- name: Force all notified handlers to run at this point, not waiting for normal sync points
+  meta: flush_handlers
+
 - name: Include control_plane
   include_tasks: control_plane.yml
-  when: inventory_hostname in groups['tag_Type_master']
+  # when: inventory_hostname in groups['tag_Type_master']
+
+- name: Include worker
+  include_tasks: worker.yml
 ...
