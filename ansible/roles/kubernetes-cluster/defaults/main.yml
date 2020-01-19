@@ -1,0 +1,12 @@
+---
+apt_key_docker: "https://download.docker.com/linux/ubuntu/gpg"
+apt_key_kubernetes: "https://packages.cloud.google.com/apt/doc/apt-key.gpg"
+apt_repository_docker: "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+apt_repository_kubernetes: "deb https://apt.kubernetes.io/ kubernetes-xenial main"
+base_packages:
+  - aptitude
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - software-properties-common
+...

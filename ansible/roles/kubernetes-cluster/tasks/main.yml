@@ -1,6 +1,12 @@
 ---
 - name: Include base tasks
-  include_tasks: base.yml
+  include_tasks:
+    file: base.yml
+    apply:
+      tags:
+        - base
+  tags:
+    - base
 
 - name: Include docker
   include_tasks: docker.yml
