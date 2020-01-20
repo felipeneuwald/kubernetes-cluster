@@ -1,0 +1,16 @@
+---
+- name: "kubernetes : install kubernetes packages"
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_list:
+    - "{{ kubernetes_packages }}"
+
+- name: "kubernetes : prevent kubernetes packages from being upgraded"
+  dpkg_selections:
+    name: "{{ item }}"
+    selection: hold
+  with_items:
+    - "{{ kubernetes_packages }}"
+...

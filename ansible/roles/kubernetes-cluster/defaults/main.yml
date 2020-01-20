@@ -14,4 +14,8 @@ docker_packages:
     version: 5:19.03.4~3-0~ubuntu-bionic
   - package: docker-ce
     version: 5:19.03.4~3-0~ubuntu-bionic
+kubernetes_packages:
+  - kubectl
+  - kubelet
+  - kubeadm
 ...
