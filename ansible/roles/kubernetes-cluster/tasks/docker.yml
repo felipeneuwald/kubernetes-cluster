@@ -1,30 +1,29 @@
 ---
-### https://kubernetes.io/docs/setup/production-environment/container-runtimes/
-- name: Install Docker
+- name: "docker : install docker packages"
   apt:
-    name:
-      - docker-ce=5:18.09.9~3-0~ubuntu-bionic
-      - docker-ce-cli=5:18.09.9~3-0~ubuntu-bionic
+    name: "{{ item.package }}={{ item.version }}"
     state: present
+    update_cache: yes
+  with_items:
+    - "{{ docker_packages }}"
   notify:
     - restart docker
 
-- name: Prevent Docker packages of being upgraded
+- name: "docker : prevent docker packages from being upgraded"
   dpkg_selections:
-    name: "{{ item }}"
+    name: "{{ item.package }}"
     selection: hold
-  with_list:
-    - docker-ce
-    - docker-ce-cli
+  with_items:
+    - "{{ docker_packages }}"
 
-- name: Template /etc/docker/daemon.json
+- name: "docker : template /etc/docker/daemon.json"
   template:
     src: docker-daemon.json.j2
     dest: /etc/docker/daemon.json
   notify:
     - restart docker
 
-- name: Create directory /etc/systemd/system/docker.service.d
+- name: "docker : create directory /etc/systemd/system/docker.service.d"
   file:
     path: /etc/systemd/system/docker.service.d
     state: directory

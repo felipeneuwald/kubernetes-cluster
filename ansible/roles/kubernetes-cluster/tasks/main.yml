@@ -1,5 +1,5 @@
 ---
-- name: Include base tasks
+- name: "include base.yml"
   include_tasks:
     file: base.yml
     apply:
@@ -8,8 +8,17 @@
   tags:
     - base
 
-- name: Include docker
-  include_tasks: docker.yml
+- name: "include docker.yml"
+  include_tasks:
+    file: docker.yml
+    apply:
+      tags:
+        - docker
+  tags:
+    - docker
+
+# - name: Include docker
+#   include_tasks: docker.yml
 
 ### to be addded to a specific file
 - name: Install Kubernetes packages
