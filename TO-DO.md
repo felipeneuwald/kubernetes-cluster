@@ -11,7 +11,7 @@
  - [ ] Compute/EBS: additional options (like volume_type and iops) to root_block_device
  - [ ] Compute: set subnet_id besides availability_zone in instances
  - [ ] Documentation, AWS Region: Ireland, eu-west-1
- - [ ] Add support to another AWS regions
+ - [ ] Add support to other AWS regions
  - [ ] Remote state locking with DynamoDB
  - [ ] Documentation regarding S3 remote state & state locking with DynamoDB
  - [ ] Documentation: terraform.tfvars
@@ -25,3 +25,5 @@
  - [ ] Set "hostname_variable = tag_Name" in ec2.ini?
  - [ ] pre task "ec2_elb_info", region. Get the region from boto variable
  - [ ] check notifies (probably wrong)
+ - [ ] move "control_plane : apply Weave Net CNI plugin" shell command to a var set in defaults
+ - [ ] allow the choice of other CNI plugins

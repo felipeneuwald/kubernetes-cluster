@@ -1,43 +1,36 @@
 ---
-- name: Set hostname
+- name: "base : set hostnames"
   hostname:
     name: "{{ ec2_tag_Name }}"
 
-- name: Build hosts file
+- name: "base : build /etc/hosts files"
   lineinfile:
     dest: /etc/hosts
     regexp: '.*{{ ec2_tag_Name }}$'
     line: "{{ ansible_default_ipv4.address }} {{ ec2_tag_Name }}"
     state: present
 
-- name: Add Docker’s official GPG key
+- name: "base : add apt keys"
   apt_key:
-    url: https://download.docker.com/linux/ubuntu/gpg
+    url: "{{ item }}"
     state: present
+  with_items:
+    - "{{ apt_key_docker }}"
+    - "{{ apt_key_kubernetes }}"
 
-- name: Add Docker apt repository
+- name: "base : add apt repositories"
   apt_repository:
-    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable
+    repo: "{{ item }}"
     state: present
+  with_items:
+    - "{{ apt_repository_docker }}"
+    - "{{ apt_repository_kubernetes }}"
 
-- name: Add Kubernetes GPG key
-  apt_key:
-    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
-    state: present
-
-- name: Add Kubernetes apt repository
-  apt_repository:
-    repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
-    state: present
-
-- name: Install base packages
+- name: "base : install base packages"
   apt:
-    name:
-      - aptitude
-      - apt-transport-https
-      - ca-certificates
-      - curl
-      - software-properties-common
+    name: "{{ item }}"
     state: present
     update_cache: yes
+  with_list:
+    - "{{ base_packages }}"
 ...

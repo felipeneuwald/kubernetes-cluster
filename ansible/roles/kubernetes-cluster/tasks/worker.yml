@@ -1,16 +1,11 @@
 ---
-- name: kubeadm token create --print-join-command --ttl 30m
+- name: "worker : kubeadm token create"
   shell:
     cmd: kubeadm token create --print-join-command --ttl 30m
   register: token_create
   when: ec2_tag_Name == "master-a"
 
-- name: Debug
-  debug:
-    msg: "{{ token_create.stdout }}"
-  when: ec2_tag_Name == "master-a"
-
-- name: kubeadm join
+- name: "worker : kubeadm join"
   shell:
     cmd: "{{ hostvars['master_a']['token_create']['stdout'] }}"
     creates: /etc/kubernetes/kubelet.conf

@@ -1,16 +1,4 @@
 ---
-# - hosts: localhost
-#   pre_tasks:
-#     - name: Gathering facts, kube-apiserver ELB
-#       ec2_elb_info:
-#         region: eu-west-1
-#         names:
-#           - kube-apiserver
-#       register: elb_kube_apiserver
-#     # - name: Debug
-#     #   debug:
-#     #     msg: "{{ elb_kube_apiserver.elbs.0.dns_name }}"
-
 - hosts: all
   become: yes
   roles:
