@@ -1,25 +1,20 @@
 ---
-- name: Gathering facts, kube-apiserver ELB
+- name: "control_plane : gathering facts, kube-apiserver ELB"
   ec2_elb_info:
-    region: eu-west-1
+    region: "{{ aws_region }}"
     names:
       - kube-apiserver
   register: elb_kube_apiserver
   become: no
   delegate_to: localhost
-  when: inventory_hostname in groups['tag_Type_master']
+  when: ec2_tag_Type == "master"
 
-- name: Debug
+- name: "control_plane : debug kube-apiserver ELB endpoint"
   debug:
-    msg: "{{ elb_kube_apiserver.elbs.0.dns_name }}"
-  when: inventory_hostname in groups['tag_Type_master']
+    msg: "kube-apiserver ELB endpoint is {{ elb_kube_apiserver.elbs.0.dns_name }}:{{ elb_kube_apiserver.elbs.0.listeners.0.load_balancer_port }}"
+  when: ec2_tag_Name == "master-a"
 
-- name: Debug
-  debug:
-    msg: "{{ elb_kube_apiserver.elbs.0.listeners.0.load_balancer_port }}"
-  when: inventory_hostname in groups['tag_Type_master']
-
-- name: fetch certs ca.crt
+- name: "control_plane: fetch ca.crt cert from etcd-a"
   fetch:
     src: /etc/kubernetes/pki/etcd/{{ item }}
     dest: /tmp/kubernetes-cluster-control_plane/etcd/
@@ -28,7 +23,7 @@
     - ca.crt
   when: ec2_tag_Name == "etcd-a"
 
-- name: fetch certs apiserver-etcd
+- name: "control_plane : fetch apiserver-etcd certs from etcd-a"
   fetch:
     src: /etc/kubernetes/pki/{{ item }}
     dest: /tmp/kubernetes-cluster-control_plane/
@@ -38,13 +33,13 @@
     - apiserver-etcd-client.key
   when: ec2_tag_Name == "etcd-a"
 
-- name: copy ca cert
+- name: "control_plane : copy certs to master-a"
   copy:
     src: /tmp/kubernetes-cluster-control_plane/
     dest: /etc/kubernetes/pki/
   when: ec2_tag_Name == "master-a"
 
-- name: remove local directory /tmp/kubernetes-cluster-control_plane/
+- name: "control_plane: remove local directory /tmp/kubernetes-cluster-control_plane/"
   local_action:
     module: file
     path: /tmp/kubernetes-cluster-control_plane/
@@ -52,37 +47,37 @@
   become: no
   run_once: true
 
-- name: file permissions, /etc/kubernetes/pki/apiserver-etcd-client.key
+- name: "control_plane : set /etc/kubernetes/pki/apiserver-etcd-client.key file permissions"
   file:
     path: /etc/kubernetes/pki/apiserver-etcd-client.key
     mode: '0600'
   when: ec2_tag_Name == "master-a"
 
-- name: Template kubeadm-config.yaml
+- name: "control_plane : template /etc/kubernetes/kubeadm-config.yaml"
   template:
     src: control_plane-kubeadm-config.yaml.j2
     dest: /etc/kubernetes/kubeadm-config.yaml
   when: ec2_tag_Name == "master-a"
 
-- name: kubeadm init --config kubeadm-config.yaml
+- name: "control_plane : kubeadm init --config kubeadm-config.yaml"
   shell:
     cmd: kubeadm init --config /etc/kubernetes/kubeadm-config.yaml > /var/log/kubeadm-config.log
     creates: /etc/kubernetes/manifests/kube-apiserver.yaml
   when: ec2_tag_Name == "master-a"
 
-- name: fetch certs from master-a
+- name: "control_plane : fetch ca.crt cert from master-a"
   fetch:
     src: /etc/kubernetes/pki/etcd/{{ item }}
-    dest: /tmp/kubernetes-cluster-cplane_master/etcd/
+    dest: /tmp/kubernetes-cluster-control_plane_master/etcd/
     flat: yes
   with_items:
     - ca.crt
   when: ec2_tag_Name == "master-a"
 
-- name: fetch certs apiserver-etcd
+- name: "control_plane : fetch certs from master-a"
   fetch:
     src: /etc/kubernetes/pki/{{ item }}
-    dest: /tmp/kubernetes-cluster-cplane_master/
+    dest: /tmp/kubernetes-cluster-control_plane_master/
     flat: yes
   with_items:
     - ca.crt
@@ -95,21 +90,21 @@
     - apiserver-etcd-client.key
   when: ec2_tag_Name == "master-a"
 
-- name: copy ca cert
+- name: "control_plane : copy certs to master hosts"
   copy:
-    src: /tmp/kubernetes-cluster-cplane_master/
+    src: /tmp/kubernetes-cluster-control_plane_master/
     dest: /etc/kubernetes/pki/
   when: ec2_tag_Type == "master" and ec2_tag_Name != "master-a"
 
-- name: remove local directory /tmp/kubernetes-cluster-cplane_master/
+- name: "control_plane : remove local directory /tmp/kubernetes-cluster-control_plane_master/"
   local_action:
     module: file
-    path: /tmp/kubernetes-cluster-cplane_master/
+    path: /tmp/kubernetes-cluster-control_plane_master/
     state: absent
   become: no
   run_once: true
 
-- name: file permissions
+- name: "control_plane : set file permissions"
   file:
     path: /etc/kubernetes/pki/{{ item }}
     mode: '0600'
@@ -121,48 +116,38 @@
     - apiserver-etcd-client.key
   when: ec2_tag_Type == "master" and ec2_tag_Name != "master-a"
 
-- name: kubeadm token create --print-join-command --ttl 30m
+- name: "control_plane : kubeadm token create"
   shell:
     cmd: kubeadm token create --print-join-command --ttl 30m
   register: token_create
   when: ec2_tag_Name == "master-a"
 
-- name: Debug
-  debug:
-    msg: "{{ token_create.stdout }}"
-  when: ec2_tag_Name == "master-a"
-
-- name: Debug
-  debug:
-    msg: "{{ hostvars['master_a']['token_create']['stdout'] }}"
-  when: ec2_tag_Type == "master" and ec2_tag_Name != "master-a"
-
-- name: kubeadm join
+- name: "control_plane : kubeadm join"
   shell:
     cmd: "{{ hostvars['master_a']['token_create']['stdout'] }} --control-plane"
     creates: /etc/kubernetes/manifests/kube-apiserver.yaml
   when: ec2_tag_Type == "master" and ec2_tag_Name != "master-a"
 
-- name: creates /root/.kube
+- name: "control_plane : create /root/.kube directory"
   file:
     path: /root/.kube
     state: directory
   when: ec2_tag_Type == "master"
 
-- name: copies /etc/kubernetes/admin.conf to /root/.kube/config
+- name: "control_plane : copy /etc/kubernetes/admin.conf to /root/.kube/config"
   shell:
     cmd: cp /etc/kubernetes/admin.conf /root/.kube/config
     creates: /root/.kube/config
   when: ec2_tag_Type == "master"
 
-- name: set /root/.kube/config permissions
+- name: "control_plane : set /root/.kube/config file permissions"
   file:
     path: /root/.kube/config
     owner: root
     group: root
   when: ec2_tag_Type == "master"
 
-- name: apply CNI plugin
+- name: "control_plane : apply Weave Net CNI plugin"
   shell:
     cmd: kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
   when: ec2_tag_Name == "master-a"

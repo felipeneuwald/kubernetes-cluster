@@ -1,5 +1,5 @@
 ---
-- name: Template /etc/systemd/system/kubelet.service.d/20-etcd-service-manager.conf
+- name: "etcd : template /etc/systemd/system/kubelet.service.d/20-etcd-service-manager.conf"
   template:
     src: kubelet-etcd-service-manager.conf.j2
     dest: /etc/systemd/system/kubelet.service.d/20-etcd-service-manager.conf
@@ -7,18 +7,18 @@
     - systemd daemon reload
     - restart kubelet
 
-- name: Template /tmp/etcd-kubeadmcfg.yaml
+- name: "etcd : template /etc/kubernetes/kubeadmcfg.yaml"
   template:
     src: etcd-kubeadmcfg.yaml.j2
     dest: /etc/kubernetes/kubeadmcfg.yaml
 
-- name: kubeadm init phase certs etcd-ca
+- name: "etcd : kubeadm init phase certs etcd-ca"
   shell:
     cmd: kubeadm init phase certs etcd-ca
     creates: /etc/kubernetes/pki/etcd/ca.key
   when: ec2_tag_Name == "etcd-a"
 
-- name: fetch certs ca.crt
+- name: "etcd : fetch certs from etcd-a"
   fetch:
     src: /etc/kubernetes/pki/etcd/{{ item }}
     dest: /tmp/kubernetes-cluster-etcd/
@@ -28,13 +28,13 @@
     - ca.key
   when: ec2_tag_Name == "etcd-a"
 
-- name: copy ca cert
+- name: "etcd : copy certs to etcd hosts"
   copy:
     src: /tmp/kubernetes-cluster-etcd/
     dest: /etc/kubernetes/pki/etcd/
   when: ec2_tag_Name != "etcd-a"
 
-- name: remove local directory /tmp/kubernetes-cluster-etcd/
+- name: "etcd : remove local directory /tmp/kubernetes-cluster-etcd/"
   local_action:
     module: file
     path: /tmp/kubernetes-cluster-etcd/
@@ -42,13 +42,13 @@
   become: no
   run_once: true
 
-- name: file permissions, /etc/kubernetes/pki/etcd/ca.key
+- name: "etcd : set /etc/kubernetes/pki/etcd/ca.key file permissions"
   file:
     path: /etc/kubernetes/pki/etcd/ca.key
     mode: '0600'
   when: ec2_tag_Name != "etcd-a"
 
-- name: kubeadm init phase certs ....
+- name: "etcd : kubeadm init phase certs ...."
   shell:
     cmd: "{{ item }}"
   with_items:
@@ -57,14 +57,13 @@
     - "kubeadm init phase certs etcd-healthcheck-client --config=/etc/kubernetes/kubeadmcfg.yaml"
     - "kubeadm init phase certs apiserver-etcd-client --config=/etc/kubernetes/kubeadmcfg.yaml"
 
-- name: remove /etc/kubernetes/pki/etcd/ca.key
+- name: "etcd : remove /etc/kubernetes/pki/etcd/ca.key"
   file:
     path: /etc/kubernetes/pki/etcd/ca.key
     state: absent
   when: ec2_tag_Name != "etcd-a"
 
-- name: kubeadm init phase etcd local
+- name: "etcd : kubeadm init phase etcd local"
   shell:
     cmd: kubeadm init phase etcd local --config=/etc/kubernetes/kubeadmcfg.yaml
-    # creates: /etc/kubernetes/manifests/etcd.yaml
 ...

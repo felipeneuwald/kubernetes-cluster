@@ -26,16 +26,27 @@
   tags:
     - kubernetes
 
-- name: Include etcd
-  include_tasks: etcd.yml
-  when: inventory_hostname in groups['tag_Type_etcd']
+- name: "include etcd.yml"
+  include_tasks:
+    file: etcd.yml
+    apply:
+      tags:
+        - etcd
+  tags:
+    - etcd
+  when: ec2_tag_Type == "etcd"
 
-- name: Force all notified handlers to run at this point, not waiting for normal sync points
+- name: "force all notified handlers to run at this point"
   meta: flush_handlers
 
-- name: Include control_plane
-  include_tasks: control_plane.yml
-  # when: inventory_hostname in groups['tag_Type_master']
+- name: "include control_plane.yml"
+  include_tasks:
+    file: control_plane.yml
+    apply:
+      tags:
+        - control_plane
+  tags:
+    - control_plane
 
 - name: Include worker
   include_tasks: worker.yml
