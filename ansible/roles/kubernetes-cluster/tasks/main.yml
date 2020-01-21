@@ -48,6 +48,12 @@
   tags:
     - control_plane
 
-- name: Include worker
-  include_tasks: worker.yml
+- name: "include worker.yml"
+  include_tasks:
+    file: worker.yml
+    apply:
+      tags:
+        - worker
+  tags:
+    - worker
 ...
