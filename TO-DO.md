@@ -17,6 +17,8 @@
  - [ ] Documentation: terraform.tfvars
  - [ ] Appropriate security group rules
  - [x] S3: Remote state
+ - [ ] fix backend.tf with static values
+ - [ ] replace "master" by "control plane"
 - Ansible
  -  [ ] Document dynamic inventory - [link1](https://docs.ansible.com/ansible/latest/user_guide/intro_dynamic_inventory.html), [link2](https://raw.githubusercontent.com/ansible/ansible/devel/contrib/inventory/ec2.py), [link3](https://raw.githubusercontent.com/ansible/ansible/devel/contrib/inventory/ec2.ini)
  - [ ] Enforce Kubernetes packages version

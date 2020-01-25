@@ -1,1 +1,3 @@
 .terraform
+.tmp
+terraform.tfvars
