@@ -1,8 +1,6 @@
 ---
 aws:
   region: eu-west-1
-  access_key_id:
-  secret_access_key:
   backend_s3:
     bucket: felipeneuwald-kubernetes-cluster
     key: kubernetes-cluster/terraform
