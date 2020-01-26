@@ -1,1 +1,6 @@
 .terraform
+.tmp
+terraform.tfvars
+ansible.cfg
+backend.tf
+ec2.ini

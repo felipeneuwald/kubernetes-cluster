@@ -1,0 +1,7 @@
+terraform {
+  backend "s3" {
+    bucket = "{{ aws.backend_s3.bucket }}"
+    key    = "{{ aws.backend_s3.key }}"
+    region = "{{ aws.backend_s3.region }}"
+  }
+}

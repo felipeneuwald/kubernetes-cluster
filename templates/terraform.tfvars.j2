@@ -1,0 +1,48 @@
+### Provider
+provider_region                                    = "{{ aws.region }}"
+
+### Key
+key_name                                           = "{{ aws.ssh_key.key_name }}"
+public_key                                         = "{{ aws.ssh_key.public_key }}"
+
+### Network
+vpc_cidr_block                                     = "{{ aws.network.vpc_cidr_block }}"
+subnet-a_cidr_block                                = "{{ aws.network.subnet_a.cidr_block }}"
+subnet-a_availability_zone                         = "{{ aws.network.subnet_a.availability_zone }}"
+subnet-b_cidr_block                                = "{{ aws.network.subnet_b.cidr_block }}"
+subnet-b_availability_zone                         = "{{ aws.network.subnet_b.availability_zone }}"
+subnet-c_cidr_block                                = "{{ aws.network.subnet_c.cidr_block }}"
+subnet-c_availability_zone                         = "{{ aws.network.subnet_c.availability_zone }}"
+
+### Master nodes
+master_instance_ami                                = "{{ aws.nodes.control_plane.instance_ami }}"
+master_instance_type                               = "{{ aws.nodes.control_plane.instance_type}}"
+master_monitoring                                  = "{{ aws.nodes.control_plane.monitoring }}"
+master_ebs_optimized                               = "{{ aws.nodes.control_plane.ebs_optimized }}"
+master_root_block_device_volume_size               = "{{ aws.nodes.control_plane.root_block_device_volume_size }}"
+
+### etcd nodes
+etcd_instance_ami                                  = "{{ aws.nodes.etcd.instance_ami }}"
+etcd_instance_type                                 = "{{ aws.nodes.etcd.instance_type }}"
+etcd_monitoring                                    = "{{ aws.nodes.etcd.monitoring }}"
+etcd_ebs_optimized                                 = "{{ aws.nodes.etcd.ebs_optimized }}"
+etcd_root_block_device_volume_size                 = "{{ aws.nodes.etcd.root_block_device_volume_size }}"
+
+### Worker nodes
+worker_nodes_per_az                                = "{{ aws.nodes.worker.nodes_per_az }}"
+worker_instance_ami                                = "{{ aws.nodes.worker.instance_ami }}"
+worker_instance_type                               = "{{ aws.nodes.worker.instance_type }}"
+worker_monitoring                                  = "{{ aws.nodes.worker.monitoring }}"
+worker_ebs_optimized                               = "{{ aws.nodes.worker.ebs_optimized }}"
+worker_root_block_device_volume_size               = "{{ aws.nodes.worker.root_block_device_volume_size }}"
+
+### Load Balancer, kube-apiserver
+lb_kube-apiserver_idle_timeout                     = "{{ aws.load_balancer.kube_apiserver.idle_timeout }}"
+lb_kube-apiserver_connection_draining              = "{{ aws.load_balancer.kube_apiserver.connection_draining }}"
+lb_kube-apiserver_connection_draining_timeout      = "{{ aws.load_balancer.kube_apiserver.connection_draining_timeout }}"
+lb_kube-apiserver_instance_port                    = "{{ aws.load_balancer.kube_apiserver.instance_port }}"
+lb_kube-apiserver_lb_port                          = "{{ aws.load_balancer.kube_apiserver.lb_port }}"
+lb_kube-apiserver_health_check_healthy_threshold   = "{{ aws.load_balancer.kube_apiserver.health_check.healthy_threshold }}"
+lb_kube-apiserver_health_check_unhealthy_threshold = "{{ aws.load_balancer.kube_apiserver.health_check.unhealthy_threshold }}"
+lb_kube-apiserver_health_check_timeout             = "{{ aws.load_balancer.kube_apiserver.health_check.timeout }}"
+lb_kube-apiserver_health_check_interval            = "{{ aws.load_balancer.kube_apiserver.health_check.interval }}"

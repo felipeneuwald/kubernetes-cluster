@@ -2,6 +2,9 @@
 - [ ] README.md
 - [ ] A way to have both Terraform and Ansible variables all in one configuration file
 - [ ] Add a version.txt in the first version
+- [ ] Add boto (AWS settings) to README
+- [ ] boto profiles
+- [ ] Change tag "kubernetes-cluster" to a variable
 - Terraform
  - [ ] Compute: Support placement groups
  - [ ] Documentation, ebs_optimized = "true" | Error launching source instance: Unsupported: EBS-optimized instances are not supported for your requested configuration. Please check the documentation for supported configurations.
@@ -17,6 +20,8 @@
  - [ ] Documentation: terraform.tfvars
  - [ ] Appropriate security group rules
  - [x] S3: Remote state
+ - [x] fix backend.tf with static values
+ - [ ] replace "master" by "control plane"
 - Ansible
  -  [ ] Document dynamic inventory - [link1](https://docs.ansible.com/ansible/latest/user_guide/intro_dynamic_inventory.html), [link2](https://raw.githubusercontent.com/ansible/ansible/devel/contrib/inventory/ec2.py), [link3](https://raw.githubusercontent.com/ansible/ansible/devel/contrib/inventory/ec2.ini)
  - [ ] Enforce Kubernetes packages version
