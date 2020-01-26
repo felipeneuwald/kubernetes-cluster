@@ -2,6 +2,8 @@
 - [ ] README.md
 - [ ] A way to have both Terraform and Ansible variables all in one configuration file
 - [ ] Add a version.txt in the first version
+- [ ] Add boto (AWS settings) to README
+- [ ] boto profiles
 - Terraform
  - [ ] Compute: Support placement groups
  - [ ] Documentation, ebs_optimized = "true" | Error launching source instance: Unsupported: EBS-optimized instances are not supported for your requested configuration. Please check the documentation for supported configurations.
