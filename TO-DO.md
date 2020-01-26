@@ -1,6 +1,6 @@
 # TO-DO
 - [ ] README.md
-- [ ] A way to have both Terraform and Ansible variables all in one configuration file
+- [x] A way to have both Terraform and Ansible variables all in one configuration file
 - [ ] Add a version.txt in the first version
 - [ ] Add boto (AWS settings) to README
 - [ ] boto profiles
@@ -28,7 +28,6 @@
  - [ ] Packages marked as on hold are still being upgraded
  - [ ] Improve template, add a loop in etcd-kubeadmcfg.yaml.j2
  - [ ] Set "hostname_variable = tag_Name" in ec2.ini?
- - [ ] pre task "ec2_elb_info", region. Get the region from boto variable
  - [ ] check notifies (probably wrong)
  - [ ] move "control_plane : apply Weave Net CNI plugin" shell command to a var set in defaults
  - [ ] allow the choice of other CNI plugins
