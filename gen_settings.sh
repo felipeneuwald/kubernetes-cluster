@@ -11,3 +11,6 @@ j2 -f yaml templates/ansible.cfg.j2 settings.yml -o ansible/ansible.cfg
 
 echo "### Building ansible/inventories/ec2.ini..."
 j2 -f yaml templates/ec2.ini.j2 settings.yml -o ansible/inventories/ec2.ini
+
+echo "### Building ansible/roles/kubernetes-cluster/defaults/main.yml..."
+j2 -f yaml templates/kubernetes-cluster.defaults.main.yml.j2 settings.yml -o ansible/roles/kubernetes-cluster/defaults/main.yml

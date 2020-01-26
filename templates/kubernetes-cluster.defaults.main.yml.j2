@@ -1,0 +1,17 @@
+---
+aws_region: {{ aws.region }}
+apt_key_docker: "{{ ansible.docker.repository.key }}"
+apt_key_kubernetes: "{{ ansible.kubernetes.repository.key }}"
+apt_repository_docker: "{{ ansible.docker.repository.source }}"
+apt_repository_kubernetes: "{{ ansible.kubernetes.repository.source }}"
+base_packages:
+{% for item in ansible.base.packages %}  - {{ item }}
+{% endfor %}
+docker_packages:
+{% for item in ansible.docker.packages %}  - package: {{ item.package }}
+    version: {{ item.version }}
+{% endfor %}
+kubernetes_packages:
+{% for item in ansible.kubernetes.packages %}  - {{ item }}
+{% endfor %}
+...

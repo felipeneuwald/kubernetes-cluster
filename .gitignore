@@ -4,3 +4,4 @@ terraform.tfvars
 ansible.cfg
 backend.tf
 ec2.ini
+ansible/roles/kubernetes-cluster/defaults/main.yml
