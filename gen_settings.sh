@@ -8,3 +8,6 @@ j2 -f yaml templates/terraform.tfvars.j2 settings.yml -o terraform/terraform.tfv
 
 echo "### Building ansible/ansible.cfg..."
 j2 -f yaml templates/ansible.cfg.j2 settings.yml -o ansible/ansible.cfg
+
+echo "### Building ansible/inventories/ec2.ini..."
+j2 -f yaml templates/ec2.ini.j2 settings.yml -o ansible/inventories/ec2.ini
