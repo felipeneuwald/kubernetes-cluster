@@ -4,14 +4,16 @@ Deploys a fully-functional [Kubernetes](https://kubernetes.io/) Cluster in [AWS]
 
 This is a work in progress.
 
-## Requirements (?)
+![alt text](images/terraform_aws_ansible_flow.png "Logo Title Text 1")
 
-### AWS
-- A valid AWS account
-- ...
-
-### Terraform
-- Terraform v0.12.17
-
-### Ansible
+## Requirements
+- Terraform 0.12.17
 - Ansible 2.9.1
+- boto
+- j2cli
+
+-----------------------
+$ pip3 install j2cli
+< -- added as a requirement
+* have to add pyyaml as a dependency for yaml files
+* pip install j2cli[yaml] ----- could run this way too to install the dependency, but i didn't.
