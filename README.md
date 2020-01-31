@@ -3,7 +3,8 @@
 # Table of Contents
 1. [Overview](#Overview)
 2. [Requirements](#Requirements)
-3. [To-do list](#to-do-list)
+3. [Settings](#Settings)
+4. [To-do list](#to-do-list)
 
 # Overview
 
@@ -28,29 +29,130 @@ For simplicity and easy management purpose, _kubernetes-cluster_ uses a single [
 - boto
 - j2cli
 
+# Settings
+
+## `aws.region`
+
+## `aws.backend_s3.bucket`
+
+## `aws.backend_s3.key`
+
+## `aws.backend_s3.region`
+
+## `aws.ssh_key.key_name`
+
+## `aws.ssh_key.public_key`
+
+## `aws.network.vpc_cidr_block`
+
+## `aws.network.subnet_a.cidr_block`
+
+## `aws.network.subnet_a.availability_zone`
+
+## `aws.network.subnet_b.cidr_block`
+
+## `aws.network.subnet_b.availability_zone`
+
+## `aws.network.subnet_c.cidr_block`
+
+## `aws.network.subnet_c.availability_zone`
+
+## `aws.nodes.etcd.instance_ami`
+
+## `aws.nodes.etcd.instance_type`
+
+## `aws.nodes.etcd.root_block_device_volume_size`
+
+## `aws.nodes.etcd.monitoring`
+
+## `aws.nodes.etcd.ebs_optimized`
+
+## `aws.nodes.control_plane.instance_ami`
+
+## `aws.nodes.control_plane.instance_type`
+
+## `aws.nodes.control_plane.root_block_device_volume_size`
+
+## `aws.nodes.control_plane.monitoring`
+
+## `aws.nodes.control_plane.ebs_optimized`
+
+## `aws.nodes.worker.instance_ami`
+
+## `aws.nodes.worker.instance_type`
+
+## `aws.nodes.worker.root_block_device_volume_size`
+
+## `aws.nodes.worker.nodes_per_az`
+
+## `aws.nodes.worker.monitoring`
+
+## `aws.nodes.worker.ebs_optimized`
+
+## `aws.load_balancer.kube_apiserver.idle_timeout`
+
+## `aws.load_balancer.kube_apiserver.connection_draining`
+
+## `aws.load_balancer.kube_apiserver.connection_draining_timeout`
+
+## `aws.load_balancer.kube_apiserver.instance_port`
+
+## `aws.load_balancer.kube_apiserver.lb_port`
+
+## `aws.load_balancer.kube_apiserver.health_check.healthy_threshold`
+
+## `aws.load_balancer.kube_apiserver.health_check.unhealthy_threshold`
+
+## `aws.load_balancer.kube_apiserver.health_check.timeout`
+
+## `aws.load_balancer.kube_apiserver.health_check.interval`
+
+
+## `ansible.config.remote_user`
+
+## `ansible.config.private_key_file`
+
+## `ansible.config.host_key_checking`
+
+## `ansible.config.interpreter_python`
+
+## `ansible.config.inventory`
+
+## `ansible.base.packages`
+
+## `ansible.docker.repository.key`
+
+## `ansible.docker.repository.source`
+
+## `ansible.docker.repository.packages`
+
+## `ansible.kubernetes.repository.key`
+
+## `ansible.kubernetes.repository.source`
+
+## `ansible.kubernetes.repository.packages`
+
 # To-do list
-- [ ] README.md :: boto
-- [ ] README.md :: Document Ansible Dynamic Inventory - [link1](https://docs.ansible.com/ansible/latest/user_guide/intro_dynamic_inventory.html), [link2](https://raw.githubusercontent.com/ansible/ansible/devel/contrib/inventory/ec2.py), [link3](https://raw.githubusercontent.com/ansible/ansible/devel/contrib/inventory/ec2.ini)
-- [ ] Add boto profiles support
-- [ ] version.txt
-- [ ] Replace the tag "kubernetes-cluster" by a variable
-- [ ] boto profiles
-- [ ] Add a bastion host
-- [ ] Replace "master" by "control plane" (?)
-
-- [ ] Terraform :: support placement groups
-- [ ] Terraform :: ebs_optimized = true | _Error launching source instance: Unsupported: EBS-optimized instances are not supported for your requested configuration. Please check the documentation for supported configurations._
-- [ ] Terraform :: Add public and private subnets. Move the cluster to a private subnet
-- [ ] Terraform :: VPC, public and private subnets
-- [ ] Terraform :: Compute/EBS additional options, like volume_type and IOPS to root_block_device
-- [ ] Terraform :: Compute, set subnet_id instead availability_zone in instances
-- [ ] Terraform :: Remote state locking with DynamoDB
-- [ ] Terraform :: Appropriate Security Group rules
-
-- [ ] Ansible :: Enforce Kubernetes packages version
-- Ansible
-- [ ] Ansible :: Enforce Kubernetes packages version
-- [ ] Ansible :: Packages marked as on hold are still being upgraded (double-check if this is happening and fix it)
-- [ ] Ansible :: Double-check if the _notifies_ are in the right place, order.
-- [ ] Ansible :: Move _control_plane : apply Weave Net CNI plugin_ shell command to a variable
-- [ ] Allow the choice of other CNI plugins (?)
+- README.md :: boto
+- README.md :: Document Ansible Dynamic Inventory - [link1](https://docs.ansible.com/ansible/latest/user_guide/intro_dynamic_inventory.html), [link2](https://raw.githubusercontent.com/ansible/ansible/devel/contrib/inventory/ec2.py), [link3](https://raw.githubusercontent.com/ansible/ansible/devel/contrib/inventory/ec2.ini)
+- Add boto profiles support
+- requirements.txt
+- version.txt
+- Replace the tag "kubernetes-cluster" by a variable
+- boto profiles
+- Add a bastion host
+- Replace "master" by "control plane" (?)
+- Terraform :: support placement groups
+- Terraform :: ebs_optimized = true | _Error launching source instance: Unsupported: EBS-optimized instances are not supported for your requested configuration. Please check the documentation for supported configurations._
+- Terraform :: Add public and private subnets. Move the cluster to a private subnet
+- Terraform :: VPC, public and private subnets
+- Terraform :: Compute/EBS additional options, like volume_type and IOPS to root_block_device
+- Terraform :: Compute, set subnet_id instead availability_zone in instances
+- Terraform :: Remote state locking with DynamoDB
+- Terraform :: Appropriate Security Group rules
+- Ansible :: Enforce Kubernetes packages version
+- Ansible :: Enforce Kubernetes packages version
+- Ansible :: Packages marked as on hold are still being upgraded (double-check if this is happening and fix it)
+- Ansible :: Double-check if the _notifies_ are in the right place, order.
+- Ansible :: Move _control_plane : apply Weave Net CNI plugin_ shell command to a variable
+- Allow the choice of other CNI plugins (?)
