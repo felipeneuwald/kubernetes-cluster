@@ -9,7 +9,7 @@
 
 _kubernetes-cluster_ deploys a fully-functional [Kubernetes](https://kubernetes.io/) Cluster in [AWS](https://aws.amazon.com/) using [Terraform](https://www.terraform.io) for provisioning and [Ansible](https://www.ansible.com) for configuration management.
 
-AWS resources are provisioned by Terraform. The Terraform state is stored in AWS S3. Ansible's external dynamic inventory system gathers hosts data from the state file stored in S3 and deploys the Kubernetes cluster in the compute instances.
+AWS resources are provisioned by Terraform. Terraform state file is stored in AWS S3. Ansible's external dynamic inventory system gathers hosts data from the state file stored in S3 and deploys the Kubernetes cluster in the compute instances.
 
 ![alt text](images/terraform_aws_ansible_flow.png "Logo Title Text 1")
 
