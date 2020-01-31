@@ -28,44 +28,29 @@ For simplicity and easy management purpose, _kubernetes-cluster_ uses a single [
 - boto
 - j2cli
 
-
-
-
-
-
-
 # To-do list
-- [ ] README.md
- - [ ] boto
- - [ ] fix the image
-- [x] A way to have both Terraform and Ansible variables all in one configuration file
-- [ ] Add a version.txt in the first version
+- [ ] README.md :: boto
+- [ ] README.md :: Document Ansible Dynamic Inventory - [link1](https://docs.ansible.com/ansible/latest/user_guide/intro_dynamic_inventory.html), [link2](https://raw.githubusercontent.com/ansible/ansible/devel/contrib/inventory/ec2.py), [link3](https://raw.githubusercontent.com/ansible/ansible/devel/contrib/inventory/ec2.ini)
+- [ ] Add boto profiles support
+- [ ] version.txt
+- [ ] Replace the tag "kubernetes-cluster" by a variable
 - [ ] boto profiles
-- [ ] Change tag "kubernetes-cluster" to a variable
 - [ ] Add a bastion host
-- Terraform
- - [ ] Compute: Support placement groups
- - [ ] Documentation, ebs_optimized = "true" | Error launching source instance: Unsupported: EBS-optimized instances are not supported for your requested configuration. Please check the documentation for supported configurations.
- - [ ] Documentation, Provider: Credentials are in ~/.aws
- - [ ] Provider: add "profile"?
- - [ ] VPC: Public and private subnets
- - [ ] Compute/EBS: additional options (like volume_type and iops) to root_block_device
- - [ ] Compute: set subnet_id besides availability_zone in instances
- - [ ] Documentation, AWS Region: Ireland, eu-west-1
- - [ ] Add support to other AWS regions
- - [ ] Remote state locking with DynamoDB
- - [ ] Documentation regarding S3 remote state & state locking with DynamoDB
- - [ ] Documentation: terraform.tfvars
- - [ ] Appropriate security group rules
- - [x] S3: Remote state
- - [x] fix backend.tf with static values
- - [ ] replace "master" by "control plane"
+- [ ] Replace "master" by "control plane" (?)
+
+- [ ] Terraform :: support placement groups
+- [ ] Terraform :: ebs_optimized = true | _Error launching source instance: Unsupported: EBS-optimized instances are not supported for your requested configuration. Please check the documentation for supported configurations._
+- [ ] Terraform :: Add public and private subnets. Move the cluster to a private subnet
+- [ ] Terraform :: VPC, public and private subnets
+- [ ] Terraform :: Compute/EBS additional options, like volume_type and IOPS to root_block_device
+- [ ] Terraform :: Compute, set subnet_id instead availability_zone in instances
+- [ ] Terraform :: Remote state locking with DynamoDB
+- [ ] Terraform :: Appropriate Security Group rules
+
+- [ ] Ansible :: Enforce Kubernetes packages version
 - Ansible
- -  [ ] Document dynamic inventory - [link1](https://docs.ansible.com/ansible/latest/user_guide/intro_dynamic_inventory.html), [link2](https://raw.githubusercontent.com/ansible/ansible/devel/contrib/inventory/ec2.py), [link3](https://raw.githubusercontent.com/ansible/ansible/devel/contrib/inventory/ec2.ini)
- - [ ] Enforce Kubernetes packages version
- - [ ] Packages marked as on hold are still being upgraded
- - [ ] Improve template, add a loop in etcd-kubeadmcfg.yaml.j2
- - [ ] Set "hostname_variable = tag_Name" in ec2.ini?
- - [ ] check notifies (probably wrong)
- - [ ] move "control_plane : apply Weave Net CNI plugin" shell command to a var set in defaults
- - [ ] allow the choice of other CNI plugins
+- [ ] Ansible :: Enforce Kubernetes packages version
+- [ ] Ansible :: Packages marked as on hold are still being upgraded (double-check if this is happening and fix it)
+- [ ] Ansible :: Double-check if the _notifies_ are in the right place, order.
+- [ ] Ansible :: Move _control_plane : apply Weave Net CNI plugin_ shell command to a variable
+- [ ] Allow the choice of other CNI plugins (?)
