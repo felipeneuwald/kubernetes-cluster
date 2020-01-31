@@ -9,12 +9,18 @@
 
 _kubernetes-cluster_ deploys a fully-functional [Kubernetes](https://kubernetes.io/) Cluster in [AWS](https://aws.amazon.com/) using [Terraform](https://www.terraform.io) for provisioning and [Ansible](https://www.ansible.com) for configuration management.
 
-AWS resources are provisioned by Terraform. The Terraform state is stored in AWS S3. Ansible's external dynamic inventory system gathers hosts data from the state stored in S3 and deploys the Kubernetes cluster in the compute instances.
+AWS resources are provisioned by Terraform. The Terraform state is stored in AWS S3. Ansible's external dynamic inventory system gathers hosts data from the state file stored in S3 and deploys the Kubernetes cluster in the compute instances.
 
 ![alt text](images/terraform_aws_ansible_flow.png "Logo Title Text 1")
 
-For simplicity and easy management purpose, _kubernetes-cluster_ uses a single configuration file to set up all Terraform and Ansible variables.
+The Kubernetes cluster is composed by:
+- Three etcd nodes
+- Three Control Plane nodes
+- At least three Worker nodes
 
+The cluster is built taking into consideration AWS's high availability features. All nodes are distributed equally among three Availability Zones of a single region.
+
+For simplicity and easy management purpose, _kubernetes-cluster_ uses a single [YAML](https://yaml.org/) configuration file to set all variables. A shell script calls [j2cli](https://github.com/kolypto/j2cli) which builds Terraform and Ansible configuration files based on [Jinja2](https://jinja.palletsprojects.com/) templates, fetching variables from that single configuration file.
 
 ## Requirements
 - Terraform 0.12.17
@@ -22,9 +28,16 @@ For simplicity and easy management purpose, _kubernetes-cluster_ uses a single c
 - boto
 - j2cli
 
+
+
+
+
+
+
 ## To-do list
 - [ ] README.md
  - [ ] boto
+ - [ ] fix the image
 - [x] A way to have both Terraform and Ansible variables all in one configuration file
 - [ ] Add a version.txt in the first version
 - [ ] boto profiles
