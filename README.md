@@ -5,7 +5,7 @@
 2. [Requirements](#Requirements)
 3. [To-do list](#to-do-list)
 
-## Overview
+# Overview
 
 _kubernetes-cluster_ deploys a fully-functional [Kubernetes](https://kubernetes.io/) Cluster in [AWS](https://aws.amazon.com/) using [Terraform](https://www.terraform.io) for provisioning and [Ansible](https://www.ansible.com) for configuration management.
 
@@ -22,7 +22,7 @@ The cluster is built taking into consideration AWS's high availability features.
 
 For simplicity and easy management purpose, _kubernetes-cluster_ uses a single [YAML](https://yaml.org/) configuration file to set all variables. A shell script calls [j2cli](https://github.com/kolypto/j2cli) which builds Terraform and Ansible configuration files based on [Jinja2](https://jinja.palletsprojects.com/) templates, fetching variables from that single configuration file.
 
-## Requirements
+# Requirements
 - Terraform 0.12.17
 - Ansible 2.9.1
 - boto
@@ -34,7 +34,7 @@ For simplicity and easy management purpose, _kubernetes-cluster_ uses a single [
 
 
 
-## To-do list
+# To-do list
 - [ ] README.md
  - [ ] boto
  - [ ] fix the image
