@@ -157,4 +157,4 @@ For simplicity and easy management purpose, _kubernetes-cluster_ uses a single [
 - Ansible :: Packages marked as on hold are still being upgraded (double-check if this is happening and fix it)
 - Ansible :: Double-check if the _notifies_ are in the right place, order.
 - Ansible :: Move _control_plane : apply Weave Net CNI plugin_ shell command to a variable
-- Allow the choice of other CNI plugins (?)
+- Ansible :: Allow the choice of other CNI plugins (?)
