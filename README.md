@@ -1,5 +1,7 @@
 # kubernetes-cluster
 
+:warning: This is a work in progress :warning:
+
 # Table of Contents
 1. [Overview](#Overview)
 2. [Requirements](#Requirements)
@@ -31,106 +33,106 @@ For simplicity and easy management purpose, _kubernetes-cluster_ uses a single [
 
 # Settings
 
-## `aws.region`
+#### `aws.region`
 
-## `aws.backend_s3.bucket`
+#### `aws.backend_s3.bucket`
 
-## `aws.backend_s3.key`
+#### `aws.backend_s3.key`
 
-## `aws.backend_s3.region`
+#### `aws.backend_s3.region`
 
-## `aws.ssh_key.key_name`
+#### `aws.ssh_key.key_name`
 
-## `aws.ssh_key.public_key`
+#### `aws.ssh_key.public_key`
 
-## `aws.network.vpc_cidr_block`
+#### `aws.network.vpc_cidr_block`
 
-## `aws.network.subnet_a.cidr_block`
+#### `aws.network.subnet_a.cidr_block`
 
-## `aws.network.subnet_a.availability_zone`
+#### `aws.network.subnet_a.availability_zone`
 
-## `aws.network.subnet_b.cidr_block`
+#### `aws.network.subnet_b.cidr_block`
 
-## `aws.network.subnet_b.availability_zone`
+#### `aws.network.subnet_b.availability_zone`
 
-## `aws.network.subnet_c.cidr_block`
+#### `aws.network.subnet_c.cidr_block`
 
-## `aws.network.subnet_c.availability_zone`
+#### `aws.network.subnet_c.availability_zone`
 
-## `aws.nodes.etcd.instance_ami`
+#### `aws.nodes.etcd.instance_ami`
 
-## `aws.nodes.etcd.instance_type`
+#### `aws.nodes.etcd.instance_type`
 
-## `aws.nodes.etcd.root_block_device_volume_size`
+#### `aws.nodes.etcd.root_block_device_volume_size`
 
-## `aws.nodes.etcd.monitoring`
+#### `aws.nodes.etcd.monitoring`
 
-## `aws.nodes.etcd.ebs_optimized`
+#### `aws.nodes.etcd.ebs_optimized`
 
-## `aws.nodes.control_plane.instance_ami`
+#### `aws.nodes.control_plane.instance_ami`
 
-## `aws.nodes.control_plane.instance_type`
+#### `aws.nodes.control_plane.instance_type`
 
-## `aws.nodes.control_plane.root_block_device_volume_size`
+#### `aws.nodes.control_plane.root_block_device_volume_size`
 
-## `aws.nodes.control_plane.monitoring`
+#### `aws.nodes.control_plane.monitoring`
 
-## `aws.nodes.control_plane.ebs_optimized`
+#### `aws.nodes.control_plane.ebs_optimized`
 
-## `aws.nodes.worker.instance_ami`
+#### `aws.nodes.worker.instance_ami`
 
-## `aws.nodes.worker.instance_type`
+#### `aws.nodes.worker.instance_type`
 
-## `aws.nodes.worker.root_block_device_volume_size`
+#### `aws.nodes.worker.root_block_device_volume_size`
 
-## `aws.nodes.worker.nodes_per_az`
+#### `aws.nodes.worker.nodes_per_az`
 
-## `aws.nodes.worker.monitoring`
+#### `aws.nodes.worker.monitoring`
 
-## `aws.nodes.worker.ebs_optimized`
+#### `aws.nodes.worker.ebs_optimized`
 
-## `aws.load_balancer.kube_apiserver.idle_timeout`
+#### `aws.load_balancer.kube_apiserver.idle_timeout`
 
-## `aws.load_balancer.kube_apiserver.connection_draining`
+#### `aws.load_balancer.kube_apiserver.connection_draining`
 
-## `aws.load_balancer.kube_apiserver.connection_draining_timeout`
+#### `aws.load_balancer.kube_apiserver.connection_draining_timeout`
 
-## `aws.load_balancer.kube_apiserver.instance_port`
+#### `aws.load_balancer.kube_apiserver.instance_port`
 
-## `aws.load_balancer.kube_apiserver.lb_port`
+#### `aws.load_balancer.kube_apiserver.lb_port`
 
-## `aws.load_balancer.kube_apiserver.health_check.healthy_threshold`
+#### `aws.load_balancer.kube_apiserver.health_check.healthy_threshold`
 
-## `aws.load_balancer.kube_apiserver.health_check.unhealthy_threshold`
+#### `aws.load_balancer.kube_apiserver.health_check.unhealthy_threshold`
 
-## `aws.load_balancer.kube_apiserver.health_check.timeout`
+#### `aws.load_balancer.kube_apiserver.health_check.timeout`
 
-## `aws.load_balancer.kube_apiserver.health_check.interval`
+#### `aws.load_balancer.kube_apiserver.health_check.interval`
 
 
-## `ansible.config.remote_user`
+#### `ansible.config.remote_user`
 
-## `ansible.config.private_key_file`
+#### `ansible.config.private_key_file`
 
-## `ansible.config.host_key_checking`
+#### `ansible.config.host_key_checking`
 
-## `ansible.config.interpreter_python`
+#### `ansible.config.interpreter_python`
 
-## `ansible.config.inventory`
+#### `ansible.config.inventory`
 
-## `ansible.base.packages`
+#### `ansible.base.packages`
 
-## `ansible.docker.repository.key`
+#### `ansible.docker.repository.key`
 
-## `ansible.docker.repository.source`
+#### `ansible.docker.repository.source`
 
-## `ansible.docker.repository.packages`
+#### `ansible.docker.repository.packages`
 
-## `ansible.kubernetes.repository.key`
+#### `ansible.kubernetes.repository.key`
 
-## `ansible.kubernetes.repository.source`
+#### `ansible.kubernetes.repository.source`
 
-## `ansible.kubernetes.repository.packages`
+#### `ansible.kubernetes.repository.packages`
 
 # To-do list
 - README.md :: boto
