@@ -43,13 +43,13 @@ The settings are defined in the `settings.yml` file.
 #### `aws.backend_s3.bucket`
 
 - The bucket to store the state file
-- _kubernetes_cluster_ does not handle bucket creation. It must be an existent bucket
+- _kubernetes_cluster_ does not handle bucket creation. Must be an existent bucket
 - Reference: [https://www.terraform.io/docs/backends/types/s3.html#bucket](https://www.terraform.io/docs/backends/types/s3.html#bucket)
 
 #### `aws.backend_s3.key`
 
-- The path to store the state file inside the bucket
-- _kubernetes_cluster_ does not handle path creation. It must be an existent path
+- The path to store the Terraform state file inside the bucket
+- _kubernetes_cluster_ does not handle path creation. Must be an existent path
 - Reference: [https://www.terraform.io/docs/backends/types/s3.html#key](https://www.terraform.io/docs/backends/types/s3.html#key)
 
 #### `aws.backend_s3.region`
@@ -61,24 +61,43 @@ The settings are defined in the `settings.yml` file.
 
 - Reference: [https://www.terraform.io/docs/providers/aws/r/key_pair.html#key_name](https://www.terraform.io/docs/providers/aws/r/key_pair.html#key_name)
 
-
 #### `aws.ssh_key.public_key`
 
 - Reference: [https://www.terraform.io/docs/providers/aws/r/key_pair.html#public_key](https://www.terraform.io/docs/providers/aws/r/key_pair.html#public_key)
 
 #### `aws.network.vpc_cidr_block`
 
+- Reference: [https://www.terraform.io/docs/providers/aws/r/vpc.html#cidr_block](https://www.terraform.io/docs/providers/aws/r/vpc.html#cidr_block)
+
 #### `aws.network.subnet_a.cidr_block`
+
+- Subnet A CIDR Block
+- Reference: [https://www.terraform.io/docs/providers/aws/r/subnet.html#cidr_block](https://www.terraform.io/docs/providers/aws/r/subnet.html#cidr_block)
 
 #### `aws.network.subnet_a.availability_zone`
 
+- Subnet A Availability Zone
+- Reference: [https://www.terraform.io/docs/providers/aws/r/subnet.html#availability_zone](https://www.terraform.io/docs/providers/aws/r/subnet.html#availability_zone)
+
 #### `aws.network.subnet_b.cidr_block`
+
+- Subnet B CIDR Block
+- Reference: [https://www.terraform.io/docs/providers/aws/r/subnet.html#cidr_block](https://www.terraform.io/docs/providers/aws/r/subnet.html#cidr_block)
 
 #### `aws.network.subnet_b.availability_zone`
 
+- Subnet B Availability Zone
+- Reference: [https://www.terraform.io/docs/providers/aws/r/subnet.html#availability_zone](https://www.terraform.io/docs/providers/aws/r/subnet.html#availability_zone)
+
 #### `aws.network.subnet_c.cidr_block`
 
+- Subnet C CIDR Block
+- Reference: [https://www.terraform.io/docs/providers/aws/r/subnet.html#cidr_block](https://www.terraform.io/docs/providers/aws/r/subnet.html#cidr_block)
+
 #### `aws.network.subnet_c.availability_zone`
+
+- Subnet C Availability Zone
+- Reference: [https://www.terraform.io/docs/providers/aws/r/subnet.html#availability_zone](https://www.terraform.io/docs/providers/aws/r/subnet.html#availability_zone)
 
 #### `aws.nodes.etcd.instance_ami`
 
