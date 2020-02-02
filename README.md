@@ -44,26 +44,26 @@ The settings are defined in the `settings.yml` file.
 
 - The bucket to store the state file
 - _kubernetes_cluster_ does not handle bucket creation. Must be an existent bucket
-- Reference: [Terraform Documentation](https://www.terraform.io/docs/backends/types/s3.html#bucket)
+- Reference: <sup>[1](https://www.terraform.io/docs/backends/types/s3.html#bucket)</sup>
 
 #### `aws.backend_s3.key`
 
 - The path to store the Terraform state file inside the bucket
 - _kubernetes_cluster_ does not handle path creation. Must be an existent path
-- Reference: [*(https://www.terraform.io/docs/backends/types/s3.html#key)
+- Reference: <sup>[1](https://www.terraform.io/docs/backends/types/s3.html#key)</sup>
 
 #### `aws.backend_s3.region`
 
 - The region of the AWS S3 Bucket where the Terraform state file will be stored
-- Reference: <sup>[*](https://www.terraform.io/docs/backends/types/s3.html#region)</sup>
+- Reference: <sup>[1](https://www.terraform.io/docs/backends/types/s3.html#region)</sup>
 
 #### `aws.ssh_key.key_name`
 
-- Reference: [*](https://www.terraform.io/docs/providers/aws/r/key_pair.html#key_name)
+- Reference: <sup>[1](https://www.terraform.io/docs/providers/aws/r/key_pair.html#key_name)</sup>
 
 #### `aws.ssh_key.public_key`
 
-- Reference: [1](https://www.terraform.io/docs/providers/aws/r/key_pair.html#public_key)
+- Reference: <sup>[1](https://www.terraform.io/docs/providers/aws/r/key_pair.html#public_key)</sup>
 
 #### `aws.network.vpc_cidr_block`
 
@@ -72,71 +72,99 @@ The settings are defined in the `settings.yml` file.
 #### `aws.network.subnet_a.cidr_block`
 
 - Subnet A CIDR Block
-- Reference: <sup>[Terraform](https://www.terraform.io/docs/providers/aws/r/subnet.html#cidr_block)</sup>
+- Reference: <sup>[1](https://www.terraform.io/docs/providers/aws/r/subnet.html#cidr_block)</sup>
 
 #### `aws.network.subnet_a.availability_zone`
 
 - Subnet A Availability Zone
-- Reference: [Terraform](https://www.terraform.io/docs/providers/aws/r/subnet.html#availability_zone)
+- Reference: <sup>[1](https://www.terraform.io/docs/providers/aws/r/subnet.html#availability_zone)</sup>
 
 #### `aws.network.subnet_b.cidr_block`
 
 - Subnet B CIDR Block
-- Reference: [Terraform](https://www.terraform.io/docs/providers/aws/r/subnet.html#cidr_block)
+- Reference: <sup>[1](https://www.terraform.io/docs/providers/aws/r/subnet.html#cidr_block)</sup>
 
 #### `aws.network.subnet_b.availability_zone`
 
 - Subnet B Availability Zone
-- Reference: [Terraform](https://www.terraform.io/docs/providers/aws/r/subnet.html#availability_zone)
+- Reference: <sup>[1](https://www.terraform.io/docs/providers/aws/r/subnet.html#availability_zone)</sup>
 
 #### `aws.network.subnet_c.cidr_block`
 
 - Subnet C CIDR Block
-- Reference: [Terraform](https://www.terraform.io/docs/providers/aws/r/subnet.html#cidr_block)
+- Reference: <sup>[1](https://www.terraform.io/docs/providers/aws/r/subnet.html#cidr_block)</sup>
 
 #### `aws.network.subnet_c.availability_zone`
 
 - Subnet C Availability Zone
-- Reference: [Terraform](https://www.terraform.io/docs/providers/aws/r/subnet.html#availability_zone)
+- Reference: <sup>[1](https://www.terraform.io/docs/providers/aws/r/subnet.html#availability_zone)</sup>
 
 #### `aws.nodes.etcd.instance_ami`
 
 - etcd nodes
-- Reference: [Terraform](https://www.terraform.io/docs/providers/aws/r/instance.html#ami)
+- Reference: <sup>[1](https://www.terraform.io/docs/providers/aws/r/instance.html#ami)</sup>
 
 #### `aws.nodes.etcd.instance_type`
 
-- Reference: [Terraform](https://www.terraform.io/docs/providers/aws/r/instance.html#instance_type)
+- Reference: <sup>[1](https://www.terraform.io/docs/providers/aws/r/instance.html#instance_type)</sup>
 
 #### `aws.nodes.etcd.root_block_device_volume_size`
 
-- Reference: [Terraform]()
+- Reference: <sup>[1](https://www.terraform.io/docs/providers/aws/r/instance.html#volume_size)</sup>
 
 #### `aws.nodes.etcd.monitoring`
 
+- Reference: <sup>[1](https://www.terraform.io/docs/providers/aws/r/instance.html#monitoring)</sup>
+
 #### `aws.nodes.etcd.ebs_optimized`
+
+- Reference: <sup>[1](https://www.terraform.io/docs/providers/aws/r/instance.html#ebs_optimized)</sup>
 
 #### `aws.nodes.control_plane.instance_ami`
 
+- Control Plane nodes
+- Reference: <sup>[1](https://www.terraform.io/docs/providers/aws/r/instance.html#ami)</sup>
+
 #### `aws.nodes.control_plane.instance_type`
+
+- Reference: <sup>[1](https://www.terraform.io/docs/providers/aws/r/instance.html#instance_type)</sup>
 
 #### `aws.nodes.control_plane.root_block_device_volume_size`
 
+- Reference: <sup>[1](https://www.terraform.io/docs/providers/aws/r/instance.html#volume_size)</sup>
+
 #### `aws.nodes.control_plane.monitoring`
+
+- Reference: <sup>[1](https://www.terraform.io/docs/providers/aws/r/instance.html#monitoring)</sup>
 
 #### `aws.nodes.control_plane.ebs_optimized`
 
+- Reference: <sup>[1](https://www.terraform.io/docs/providers/aws/r/instance.html#ebs_optimized)</sup>
+
 #### `aws.nodes.worker.instance_ami`
+
+- Worker nodes
+- Reference: <sup>[1](https://www.terraform.io/docs/providers/aws/r/instance.html#ami)</sup>
 
 #### `aws.nodes.worker.instance_type`
 
+- Reference: <sup>[1](https://www.terraform.io/docs/providers/aws/r/instance.html#instance_type)</sup>
+
 #### `aws.nodes.worker.root_block_device_volume_size`
+
+- Reference: <sup>[1](https://www.terraform.io/docs/providers/aws/r/instance.html#volume_size)</sup>
 
 #### `aws.nodes.worker.nodes_per_az`
 
+- The number of Worker instances per Availability Zone
+
 #### `aws.nodes.worker.monitoring`
 
+- Reference: <sup>[1](https://www.terraform.io/docs/providers/aws/r/instance.html#monitoring)</sup>
+
 #### `aws.nodes.worker.ebs_optimized`
+
+- Reference: <sup>[1](https://www.terraform.io/docs/providers/aws/r/instance.html#ebs_optimized)</sup>
 
 #### `aws.load_balancer.kube_apiserver.idle_timeout`
 
@@ -199,6 +227,7 @@ The settings are defined in the `settings.yml` file.
 - Terraform :: Compute, set subnet_id instead availability_zone in instances
 - Terraform :: Remote state locking with DynamoDB
 - Terraform :: Appropriate Security Group rules
+- Terraform :: Add additional options for aws.nodes.etcd.root_block_device
 - Ansible :: Enforce Kubernetes packages version
 - Ansible :: Enforce Kubernetes packages version
 - Ansible :: Packages marked as on hold are still being upgraded (double-check if this is happening and fix it)
