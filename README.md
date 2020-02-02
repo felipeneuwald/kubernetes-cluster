@@ -40,6 +40,10 @@ The settings are defined in the `settings.yml` file.
 - AWS Region
 - Must have at least 3 Availability Zones
 
+### `aws.backend_s3`
+
+Settings related to the S3 Backend
+
 #### `aws.backend_s3.bucket`
 
 - The bucket to store the state file
