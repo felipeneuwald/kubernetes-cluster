@@ -67,12 +67,12 @@ The settings are defined in the `settings.yml` file.
 
 #### `aws.network.vpc_cidr_block`
 
-- Reference: <sup>[1]</sup>(https://www.terraform.io/docs/providers/aws/r/vpc.html#cidr_block)
+- Reference: <sup>[1](https://www.terraform.io/docs/providers/aws/r/vpc.html#cidr_block)</sup>
 
 #### `aws.network.subnet_a.cidr_block`
 
 - Subnet A CIDR Block
-- Reference: <sup>[Terraform]</sup>(https://www.terraform.io/docs/providers/aws/r/subnet.html#cidr_block)
+- Reference: <sup>[Terraform](https://www.terraform.io/docs/providers/aws/r/subnet.html#cidr_block)</sup>
 
 #### `aws.network.subnet_a.availability_zone`
 
