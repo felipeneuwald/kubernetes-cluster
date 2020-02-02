@@ -67,43 +67,50 @@ The settings are defined in the `settings.yml` file.
 
 #### `aws.network.vpc_cidr_block`
 
-- Reference: [Terraform Documentation](https://www.terraform.io/docs/providers/aws/r/vpc.html#cidr_block)
+- Reference: <sup>[1]</sup>(https://www.terraform.io/docs/providers/aws/r/vpc.html#cidr_block)
 
 #### `aws.network.subnet_a.cidr_block`
 
 - Subnet A CIDR Block
-- Reference: [Terraform Documentation](https://www.terraform.io/docs/providers/aws/r/subnet.html#cidr_block)
+- Reference: <sup>[Terraform]</sup>(https://www.terraform.io/docs/providers/aws/r/subnet.html#cidr_block)
 
 #### `aws.network.subnet_a.availability_zone`
 
 - Subnet A Availability Zone
-- Reference: [Terraform Documentation](https://www.terraform.io/docs/providers/aws/r/subnet.html#availability_zone)
+- Reference: [Terraform](https://www.terraform.io/docs/providers/aws/r/subnet.html#availability_zone)
 
 #### `aws.network.subnet_b.cidr_block`
 
 - Subnet B CIDR Block
-- Reference: [Terraform Documentation](https://www.terraform.io/docs/providers/aws/r/subnet.html#cidr_block)
+- Reference: [Terraform](https://www.terraform.io/docs/providers/aws/r/subnet.html#cidr_block)
 
 #### `aws.network.subnet_b.availability_zone`
 
 - Subnet B Availability Zone
-- Reference: [Terraform Documentation](https://www.terraform.io/docs/providers/aws/r/subnet.html#availability_zone)
+- Reference: [Terraform](https://www.terraform.io/docs/providers/aws/r/subnet.html#availability_zone)
 
 #### `aws.network.subnet_c.cidr_block`
 
 - Subnet C CIDR Block
-- Reference: [Terraform Documentation](https://www.terraform.io/docs/providers/aws/r/subnet.html#cidr_block)
+- Reference: [Terraform](https://www.terraform.io/docs/providers/aws/r/subnet.html#cidr_block)
 
 #### `aws.network.subnet_c.availability_zone`
 
 - Subnet C Availability Zone
-- Reference: [Terraform Documentation](https://www.terraform.io/docs/providers/aws/r/subnet.html#availability_zone)
+- Reference: [Terraform](https://www.terraform.io/docs/providers/aws/r/subnet.html#availability_zone)
 
 #### `aws.nodes.etcd.instance_ami`
 
+- etcd nodes
+- Reference: [Terraform](https://www.terraform.io/docs/providers/aws/r/instance.html#ami)
+
 #### `aws.nodes.etcd.instance_type`
 
+- Reference: [Terraform](https://www.terraform.io/docs/providers/aws/r/instance.html#instance_type)
+
 #### `aws.nodes.etcd.root_block_device_volume_size`
+
+- Reference: [Terraform]()
 
 #### `aws.nodes.etcd.monitoring`
 
