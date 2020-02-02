@@ -50,20 +50,20 @@ The settings are defined in the `settings.yml` file.
 
 - The path to store the Terraform state file inside the bucket
 - _kubernetes_cluster_ does not handle path creation. Must be an existent path
-- Reference: [Terraform Documentation](https://www.terraform.io/docs/backends/types/s3.html#key)
+- Reference: [*(https://www.terraform.io/docs/backends/types/s3.html#key)
 
 #### `aws.backend_s3.region`
 
 - The region of the AWS S3 Bucket where the Terraform state file will be stored
-- Reference: [Terraform Documentation](https://www.terraform.io/docs/backends/types/s3.html#region)
+- Reference: <sup>[*](https://www.terraform.io/docs/backends/types/s3.html#region)</sup>
 
 #### `aws.ssh_key.key_name`
 
-- Reference: [Terraform Documentation](https://www.terraform.io/docs/providers/aws/r/key_pair.html#key_name)
+- Reference: [*](https://www.terraform.io/docs/providers/aws/r/key_pair.html#key_name)
 
 #### `aws.ssh_key.public_key`
 
-- Reference: [Terraform Documentation](https://www.terraform.io/docs/providers/aws/r/key_pair.html#public_key)
+- Reference: [1](https://www.terraform.io/docs/providers/aws/r/key_pair.html#public_key)
 
 #### `aws.network.vpc_cidr_block`
 
