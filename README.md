@@ -33,17 +33,38 @@ For simplicity and easy management purpose, _kubernetes-cluster_ uses a single [
 
 ## Settings
 
+The settings are defined in the `settings.yml` file.
+
 #### `aws.region`
+
+- AWS Region
+- Must have at least 3 Availability Zones
 
 #### `aws.backend_s3.bucket`
 
+- The bucket to store the state file
+- _kubernetes_cluster_ does not handle bucket creation. It must be an existent bucket
+- Reference: [https://www.terraform.io/docs/backends/types/s3.html#bucket](https://www.terraform.io/docs/backends/types/s3.html#bucket)
+
 #### `aws.backend_s3.key`
+
+- The path to store the state file inside the bucket
+- _kubernetes_cluster_ does not handle path creation. It must be an existent path
+- Reference: [https://www.terraform.io/docs/backends/types/s3.html#key](https://www.terraform.io/docs/backends/types/s3.html#key)
 
 #### `aws.backend_s3.region`
 
+- The region of the AWS S3 Bucket where the Terraform state file will be stored
+- Reference: [https://www.terraform.io/docs/backends/types/s3.html#region](https://www.terraform.io/docs/backends/types/s3.html#region)
+
 #### `aws.ssh_key.key_name`
 
+- Reference: [https://www.terraform.io/docs/providers/aws/r/key_pair.html#key_name](https://www.terraform.io/docs/providers/aws/r/key_pair.html#key_name)
+
+
 #### `aws.ssh_key.public_key`
+
+- Reference: [https://www.terraform.io/docs/providers/aws/r/key_pair.html#public_key](https://www.terraform.io/docs/providers/aws/r/key_pair.html#public_key)
 
 #### `aws.network.vpc_cidr_block`
 
