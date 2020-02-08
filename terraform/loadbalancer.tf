@@ -1,6 +1,6 @@
 resource "aws_elb" "kube-apiserver" {
   name                        = "kube-apiserver"
-  internal                    = true
+  internal                    = false
   cross_zone_load_balancing   = true
   idle_timeout                = var.lb_kube-apiserver_idle_timeout
   connection_draining         = var.lb_kube-apiserver_connection_draining
@@ -11,7 +11,8 @@ resource "aws_elb" "kube-apiserver" {
     "${aws_subnet.subnet-c.id}"
   ]
   security_groups             = [
-    "${aws_security_group.kubernetes-cluster.id}"
+    "${aws_security_group.kubernetes-cluster.id}",
+    "${aws_security_group.kube-apiserver.id}"
   ]
   instances                   = [
     "${aws_instance.master-a.id}",
