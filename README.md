@@ -10,7 +10,7 @@
 
 ## Overview
 
-_kubernetes-cluster_ deploys a fully-functional [Kubernetes](https://kubernetes.io/) Cluster in [AWS](https://aws.amazon.com/) using [Terraform](https://www.terraform.io) for provisioning and [Ansible](https://www.ansible.com) for configuration management.
+*kubernetes-cluster* deploys a fully-functional [Kubernetes](https://kubernetes.io/) Cluster in [AWS](https://aws.amazon.com/) using [Terraform](https://www.terraform.io) for provisioning and [Ansible](https://www.ansible.com) for configuration management.
 
 AWS resources are provisioned by Terraform. Terraform state file is stored in AWS S3. Ansible's external dynamic inventory system gathers hosts data from the state file stored in S3 and deploys the Kubernetes cluster in the compute instances.
 
@@ -23,7 +23,7 @@ The Kubernetes cluster is composed by:
 
 The cluster is built taking into consideration AWS's high availability features. All nodes are distributed equally among three Availability Zones of a single region.
 
-For simplicity and easy management purpose, _kubernetes-cluster_ uses a single [YAML](https://yaml.org/) configuration file to set all variables. A shell script calls [j2cli](https://github.com/kolypto/j2cli) which builds Terraform and Ansible configuration files based on [Jinja2](https://jinja.palletsprojects.com/) templates, fetching variables from that single configuration file.
+For simplicity and easy management purpose, *kubernetes-cluster* uses a single [YAML](https://yaml.org/) configuration file to set all variables. A shell script calls [j2cli](https://github.com/kolypto/j2cli) which builds Terraform and Ansible configuration files based on [Jinja2](https://jinja.palletsprojects.com/) templates, fetching variables from that single configuration file.
 
 ## Requirements
 - Terraform 0.12.17
@@ -43,13 +43,13 @@ The settings are defined in the `settings.yml` file.
 #### `aws.backend_s3.bucket`
 
 - The bucket to store the state file
-- _kubernetes_cluster_ does not handle bucket creation. Must be an existent bucket
+- *kubernetes_cluster* does not handle bucket creation. Must be an existent bucket
 - Reference: <sup>[1](https://www.terraform.io/docs/backends/types/s3.html#bucket)</sup>
 
 #### `aws.backend_s3.key`
 
 - The path to store the Terraform state file inside the bucket
-- _kubernetes_cluster_ does not handle path creation. Must be an existent path
+- *kubernetes_cluster* does not handle path creation. Must be an existent path
 - Reference: <sup>[1](https://www.terraform.io/docs/backends/types/s3.html#key)</sup>
 
 #### `aws.backend_s3.region`
@@ -222,7 +222,6 @@ The settings are defined in the `settings.yml` file.
 - Terraform :: support placement groups
 - Terraform :: ebs_optimized = true | _Error launching source instance: Unsupported: EBS-optimized instances are not supported for your requested configuration. Please check the documentation for supported configurations._
 - Terraform :: Add public and private subnets. Move the cluster to a private subnet
-- Terraform :: VPC, public and private subnets
 - Terraform :: Compute/EBS additional options, like volume_type and IOPS to root_block_device
 - Terraform :: Compute, set subnet_id instead availability_zone in instances
 - Terraform :: Remote state locking with DynamoDB
@@ -234,3 +233,4 @@ The settings are defined in the `settings.yml` file.
 - Ansible :: Double-check if the _notifies_ are in the right place, order.
 - Ansible :: Move _control_plane : apply Weave Net CNI plugin_ shell command to a variable
 - Ansible :: Allow the choice of other CNI plugins (?)
+- Ansible :: Copy .kube/config to localhost.
