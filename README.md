@@ -1,6 +1,6 @@
 # kubernetes-cluster
 
-:warning: This is a work in progress :warning:
+:warning: DEPRECATED :warning:
 
 ## Table of Contents
 1. [Overview](#Overview)
