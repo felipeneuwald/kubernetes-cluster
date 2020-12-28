@@ -1,6 +1,6 @@
 # kubernetes-cluster
 
-:warning:DEPRECATED:warning:
+:warning: DEPRECATED :warning:
 
 ## Table of Contents
 1. [Overview](#Overview)
